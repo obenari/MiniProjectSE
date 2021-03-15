@@ -17,7 +17,6 @@ public final class Main {
      * @param args irrelevant here
      */
     public static void main(String[] args) {
-
         try { // test zero vector
             new Vector(0d, 0d, 0d);
             out.println("ERROR: zero vector does not throw an exception");

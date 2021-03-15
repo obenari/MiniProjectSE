@@ -2,10 +2,18 @@ package primitives;
 
 import static primitives.Util.*;
 import static primitives.Point3D.ZERO;
-
+/**
+ **this class represent a vector in 3D Cartesian coordinate
+ *  * system
+ * @author Odelia Ben Ari
+ */
 public class Vector {
     Point3D _head;
 
+    /**
+     * this constructor get the vector head
+     * @param head the vector head
+     */
     public Vector(Point3D head) {
         if (ZERO.equals(head))
             throw new IllegalArgumentException("cannot create the vector (0,0,0)");
@@ -13,11 +21,10 @@ public class Vector {
     }
 
     /**
-     * this ctor dont call to the prev ctor in order to make a good performance
-     *
-     * @param x
-     * @param y
-     * @param z
+     * this constructor don't call to the prev constructor in order to make  good performance
+     * @param x the value of x coordinate in the vector
+     * @param y the value of y coordinate in the vector
+     * @param z the value of z coordinate in the vector
      */
     public Vector(Double x, Double y, Double z) {
         Point3D head = new Point3D(x, y, z);
@@ -27,8 +34,7 @@ public class Vector {
     }
 
     /**
-     * this ctor dont call to the prev ctor in order to make a good performance
-     *
+     * this constructor don"t call to the prev constructor in order to make  good performance
      * @param x the value of x coordinate
      * @param y the value of y coordinate
      * @param z the value of z coordinate
@@ -41,6 +47,7 @@ public class Vector {
     }
 
     public Point3D getHead() {
+
         return _head;
     }
 
@@ -52,14 +59,24 @@ public class Vector {
         return _head.equals(vector._head);
     }
 
-
+    /**
+     * this method return the value of Scleric product between the request vector and this vector
+     * @param v the vector to product with this vector
+     * @return
+     */
     public double dotProduct(Vector v) {
+        //the calculate is x1*x2+y1*y2+z1*z2
         return _head._x.coord * v._head._x.coord +
                 _head._y.coord * v._head._y.coord +
                 _head._z.coord * v._head._z.coord;
     }
 
-    public Vector subtruct(Vector other) {
+    /**
+     * this method return a new vector that received  after subtract the request vector from this vector
+     * @param other
+     * @return
+     */
+    public Vector subtract(Vector other) {
         if (other.equals(this))
             throw new IllegalArgumentException("cannot subtract the vector" + other + " by the same vector");
         return new Vector(
@@ -68,12 +85,20 @@ public class Vector {
                 _head._z.coord - other._head._z.coord);
     }
 
+    /**
+     * this method return the vector length squared
+     * @return
+     */
     public double lengthSquared() {
-        return _head._x.coord * _head._x.coord +
+        return  _head._x.coord * _head._x.coord +
                 _head._y.coord * _head._y.coord +
                 _head._z.coord * _head._z.coord;
     }
 
+    /**
+     * this method return the vector length
+     * @return
+     */
     public double length() {
         return Math.sqrt(this.lengthSquared());
     }
@@ -87,43 +112,52 @@ public class Vector {
         double len = this.length();
         if (isZero(len))
             throw new ArithmeticException("the length is o");
-        double x = _head._x.coord;
-        double y = _head._y.coord;
-        double z = _head._z.coord;
-        x /= len;
-        y /= len;
-        z /= len;
+        double x = _head._x.coord/len;
+        double y = _head._y.coord/len;
+        double z = _head._z.coord/len;
         _head = new Point3D(x, y, z);
         return this;
     }
+
     /**
-     * return new vector after dividing this vector by its length
-     *
+     * return new vector in the same direction to this, but with length 1
      * @return this vector after change its length to 1
      */
     public Vector normalized() {
-//        double len = this.length();
-//        if (isZero(len))
-//            throw new ArithmeticException("the length is o");
-//        double x = _head._x.coord;
-//        double y = _head._y.coord;
-//        double z = _head._z.coord;
-//        x /= len;
-//        y /= len;
-//        z /= len;
-//        return new Vector(x,y,z);
-        Vector result=new Vector(_head);
+        Vector result = new Vector(_head);
         return result.normalize();
     }
-    public Vector crossProduct(Vector v){
-        double x=_head._y.coord*v._head._z.coord-v._head._y.coord*_head._z.coord;
-        double y=-_head._x.coord*v._head._z.coord+v._head._x.coord*_head._z.coord;
-        double z=_head._x.coord*v._head._y.coord-v._head._x.coord*_head._y.coord;
-        Point3D point3D=new Point3D(x,y,z);
-        if(ZERO.equals(point3D))
+
+    /**
+     *this method return a new vector that vertical to this vector and the request vector
+     * @param v
+     * @return
+     */
+    public Vector crossProduct(Vector v) {
+        //UxV= (Uy*Vz-Vy*Uz,-Ux*Vz+Vx*Uz,Ux*Vy-Vx*Uy)
+        double x = _head._y.coord * v._head._z.coord - v._head._y.coord * _head._z.coord;
+        double y = -_head._x.coord * v._head._z.coord + v._head._x.coord * _head._z.coord;
+        double z = _head._x.coord * v._head._y.coord - v._head._x.coord * _head._y.coord;
+        Point3D point3D = new Point3D(x, y, z);
+        if (ZERO.equals(point3D))
             throw new IllegalArgumentException("the crossProduct return the zero vector");
         return new Vector(point3D);
 
     }
 
+    /**
+     * return a new vector after scale this vector by the request number
+     * @param a the value to multiply
+     * @return new vector after scale this vector by the request number
+     */
+    public Vector scale(double a) {
+        if (isZero(0)) {
+            throw new IllegalArgumentException("cannot scale by 0");
+        }
+        double x = _head._x.coord * a;
+        double y = _head._y.coord * a;
+        double z = _head._z.coord * a;
+        return new Vector(x, y, z);
+
+    }
 }

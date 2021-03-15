@@ -1,6 +1,10 @@
 package primitives;
 
-
+/**
+ *this class represent a point with 3 coordinate in 3D Cartesian coordinate
+ * system
+ * @author Odelia Ben Ari
+ */
 public class Point3D {
     final Coordinate _x;
     final Coordinate _y;
@@ -20,7 +24,7 @@ public class Point3D {
     }
 
     /**
-     * this ctor dont call to the ctor that get Coordinate in order to make the best performance
+     * this constructor don't call to the constructor that get Coordinate in order to make  best performance
      *
      * @param x value for creating X coordinate
      * @param y value for creating Y coordinate
@@ -46,38 +50,49 @@ public class Point3D {
         return "(" + _x + "," + _y + "," + _z + ')';
     }
 
+    /**
+     * this method calculate the point that received after adding the vector to thos point
+     * @param vector the vector to add to this point
+     * @return new point after adding the vector from this point
+     */
     public Point3D add(Vector vector) {
         Double x = vector._head._x.coord + _x.coord;
         Double y = vector._head._y.coord + _y.coord;
-        Double z = vector._head._y.coord + _z.coord;
+        Double z = vector._head._z.coord + _z.coord;
 
         return new Point3D(x, y, z);
     }
 
     /**
-     * this method return the point that we get after substract the request vector
+     * this method return the point that we get after subtract the request vector
      *
      * @param point3D the vector to subtract
-     * @return
+     * @return new point after subtracting the vector from this point
      */
     public Vector subtract(Point3D point3D) {
         Double x = _x.coord - point3D._x.coord;
         Double y = _y.coord - point3D._y.coord;
-        Double z = _z.coord - point3D._y.coord;
+        Double z = _z.coord - point3D._z.coord;
         return new Vector(x, y, z);
     }
 
     /**
-     * @param point3D
-     * @return
+     * this method return the distance squared from the request point to this point
+     * @param point3D the point to calculate the distance from this point
+     * @return the distance squared from the request point to this point
      */
     public double distanceSquared(Point3D point3D) {
+        //the calculate is (x-x0)^2+(y-y0)^2+(z-z0)^2
         return (_x.coord - point3D._x.coord) * (_x.coord - point3D._x.coord) +
                 (_y.coord - point3D._y.coord) * (_y.coord - point3D._y.coord) +
                 (_z.coord - point3D._z.coord) * (_z.coord - point3D._z.coord);
     }
 
-
+    /**
+     * this method return the distance  from the request point to this point
+     * @param point3D the point to calculate the distance from this point
+     * @return the distance  from the request point to this point
+     */
     public double distance(Point3D point3D) {
         return Math.sqrt(this.distanceSquared(point3D));
     }
