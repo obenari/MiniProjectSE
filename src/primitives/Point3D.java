@@ -30,12 +30,13 @@ public class Point3D {
      * @param y value for creating Y coordinate
      * @param z value for creating Z coordinate
      */
-    public Point3D(Double x, Double y, double z) {
+    public Point3D(double x, double y, double z) {
         _x = new Coordinate(x);
         _y = new Coordinate(y);
         _z = new Coordinate(z);
 
     }
+
 
     @Override
     public boolean equals(Object o) {

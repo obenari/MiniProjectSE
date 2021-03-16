@@ -26,7 +26,7 @@ public class Vector {
      * @param y the value of y coordinate in the vector
      * @param z the value of z coordinate in the vector
      */
-    public Vector(Double x, Double y, Double z) {
+    public Vector(double x, double y, double z) {
         Point3D head = new Point3D(x, y, z);
         if (ZERO.equals(head))
             throw new IllegalArgumentException("cannot create the vector (0,0,0)");
@@ -57,6 +57,12 @@ public class Vector {
         if (o == null || getClass() != o.getClass()) return false;
         Vector vector = (Vector) o;
         return _head.equals(vector._head);
+    }
+
+    @Override
+    public String toString() {
+        return  _head.toString();
+
     }
 
     /**
@@ -151,7 +157,7 @@ public class Vector {
      * @return new vector after scale this vector by the request number
      */
     public Vector scale(double a) {
-        if (isZero(0)) {
+        if (isZero(a)) {
             throw new IllegalArgumentException("cannot scale by 0");
         }
         double x = _head._x.coord * a;

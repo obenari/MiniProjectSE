@@ -17,7 +17,12 @@ public class Plane implements Geometry{
     }
     public Plane(Point3D p1,Point3D p2, Point3D p3) {
         _p0=p1;
-        _normal = null;
+        //calculate the normal
+        Vector v=p2.subtract(p1).normalize();
+        Vector u=p3.subtract(p1).normalized();
+        if(v.equals(u)||v.equals(u.scale(-1)))//because the vectors is normalized, it possible to check if they are equal
+            throw new IllegalArgumentException("the plane cannot get 3 point in the same line");
+        _normal = v.crossProduct(u).normalize();
     }
 
     public Point3D getP0() {
@@ -28,9 +33,9 @@ public class Plane implements Geometry{
     public Vector getNormal(Point3D point) {
         return _normal;
     }
-    public Vector getNormal() {
-        return _normal;
-    }
+    //public Vector getNormal() {
+     //   return _normal;
+   // }
 
     @Override
     public String toString() {

@@ -6,8 +6,8 @@ import java.util.Objects;
  * @author Odelia Ben Ari
  */
 public class Ray {
-    Point3D _p0;
-    Vector _dir;
+   final Point3D _p0;
+    final Vector _dir;
 
     /**
      *
