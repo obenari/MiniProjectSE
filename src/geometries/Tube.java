@@ -3,12 +3,16 @@ package geometries;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
+
+import static primitives.Util.isZero;
+
 /**
-*this class represent a tube in 3D Cartesian coordinate
+ * this class represent a tube in 3D Cartesian coordinate
  * system
+ *
  * @author Odelia Ben Ari
  */
-public class Tube implements Geometry{
+public class Tube implements Geometry {
     Ray _axisRay;
     double _radius;
 
@@ -35,6 +39,14 @@ public class Tube implements Geometry{
 
     @Override
     public Vector getNormal(Point3D point) {
-        return null;
+        //  t=v∙(p−p0)
+        // p1=p0+t∙v
+        //normal=p-p1
+        double t = _axisRay.getDir().dotProduct(point.subtract(_axisRay.getP0()));
+        if (isZero(t)) {
+            return point.subtract(_axisRay.getP0()).normalize();
+        }
+        Point3D p1 = _axisRay.getP0().add(_axisRay.getDir().scale(t));
+        return point.subtract(p1).normalize();
     }
 }

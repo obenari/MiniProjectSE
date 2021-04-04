@@ -56,27 +56,26 @@ class VectorTest {
     @Test
     void testNormalize() {
         Vector v = new Vector(1d, 2d, 3d);
-        Vector vCopy = new Vector(v.getHead());
-        Vector vCopyNormalize = vCopy.normalize();
-        assertEquals(vCopy,vCopyNormalize,"ERROR: normalize() function creates a new vector");
+        Vector vCopyNormalize = v.normalize();
+        if (v != vCopyNormalize)
+            fail("ERROR: normalize() function creates a new vector");
         assertTrue(isZero(vCopyNormalize.length() - 1),"ERROR: normalize() result is not a unit vector");
+
     }
+
 
     @Test
     void testNormalized() {
         Vector u = v1.normalized();
         assertTrue(isZero(u.length() - 1),"ERROR: normalized() result is not a unit vector");
-        assertNotEquals(u , v1,"ERROR: normalizated() function does not create a new vector");
+        if (u ==v1)
+        fail("ERROR: normalizated() function does not create a new vector");
     }
 
 
     @Test
     void testCrossProduct() {
-        //  Vector v1 = new Vector(1d, 2d, 3d);
-        // Vector v2 = new Vector(-2d, -4d, -6d);
 
-        // ============ Equivalence Partitions Tests ==============
-        // Vector v3 = new Vector(0d, 3d, -2d);
         Vector vr = v1.crossProduct(v3);
 
         // Test that length of cross-product is proper (orthogonal vectors taken for simplicity)
