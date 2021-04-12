@@ -5,6 +5,9 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.List;
+import primitives.*;
+
+import static primitives.Util.alignZero;
 
 /**
  * this class represent a plane in 3D Cartesian coordinate
@@ -62,6 +65,16 @@ public class Plane implements Geometry {
 
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        return null;
+        if (_p0.equals(ray.getP0()))//if the start of the ray equals to the plane point there is no intersections
+            return null;
+        Vector V=_p0.subtract(ray.getP0());
+        double denominator=alignZero(_normal.dotProduct(ray.getDir()));
+        if (denominator==0)//the ray is parallel to the plane
+            return null;
+        double t=(alignZero(_normal.dotProduct(V)))/(denominator);
+        if (t<=0)
+            return null;
+        return List.of(ray.getPoint(t));
     }
+
 }
