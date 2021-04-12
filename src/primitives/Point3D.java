@@ -63,6 +63,15 @@ public class Point3D {
 
         return new Point3D(x, y, z);
     }
+    public double getX() {
+        return _x.coord;
+    }
+    public double getY() {
+        return _y.coord;
+    }
+    public double getZ() {
+        return _z.coord;
+    }
 
     /**
      * this method return the point that we get after subtract the request vector
@@ -97,5 +106,6 @@ public class Point3D {
     public double distance(Point3D point3D) {
         return Math.sqrt(this.distanceSquared(point3D));
     }
+
 
 }

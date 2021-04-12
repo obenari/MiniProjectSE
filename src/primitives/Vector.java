@@ -7,6 +7,7 @@ import static primitives.Point3D.ZERO;
  *  * system
  * @author Odelia Ben Ari
  */
+
 public class Vector {
     Point3D _head;
 

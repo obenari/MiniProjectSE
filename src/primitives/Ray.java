@@ -19,6 +19,7 @@ public class Ray {
         _dir = dir.normalized();
     }
 
+
     public Point3D getP0() {
         return _p0;
     }
@@ -38,5 +39,14 @@ public class Ray {
     @Override
     public int hashCode() {
         return Objects.hash(_p0, _dir);
+    }
+
+    /**
+     * return new point in the direction of the ray,in the distance t
+     * @param t
+     * @return
+     */
+    public Point3D getPoint(double t){
+        return _p0.add(_dir.scale(t));
     }
 }
