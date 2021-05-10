@@ -7,10 +7,11 @@ import primitives.Ray;
 import scene.Scene;
 
 import java.util.List;
+import java.util.MissingResourceException;
 
 public class Render {
     private ImageWriter _imageWriter;
-    private Scene _scene;
+   // private Scene _scene;
     private  Camera _camera;
     private RayTracerBase _rayTracer;
 
@@ -20,10 +21,10 @@ public class Render {
         return this;
     }
 
-    public Render setScene(Scene scene) {
+    /*public Render setScene(Scene scene) {
         _scene=scene;
         return  this;
-    }
+    }*/
 
     public Render setCamera(Camera camera) {
         _camera=camera;
@@ -35,7 +36,14 @@ public class Render {
         return  this;
     }
 
+    /**
+     * this function check calculate the color of each pixel, and color it
+     */
     public void renderImage() {
+        //check that all the field is not null
+        if(_imageWriter==null||_camera==null||_rayTracer==null){
+            throw new MissingResourceException("","render","");
+        }
         int nX= _imageWriter.getNx();
         int nY= _imageWriter.getNy();
         for (int i = 0; i < nY; i++) {
@@ -47,7 +55,15 @@ public class Render {
         }
     }
 
+    /**
+     * print grid on the picture
+     * @param interval distance between the lines grid
+     * @param intervalColor the color of the grid
+     */
     public void printGrid(int interval, Color intervalColor) {
+        if(_imageWriter==null) {
+            throw new MissingResourceException("_imageWriter is null", "render", "");
+        }
         int nX= _imageWriter.getNx();
         int nY= _imageWriter.getNy();
         for (int i = 0; i < nY; i++) {
@@ -60,7 +76,13 @@ public class Render {
 
     }
 
+    /**
+     * this methode implement the low of Demeter
+     */
     public void writeToImage() {
+        if(_imageWriter==null) {
+            throw new MissingResourceException("_imageWriter is null", "render", "");
+        }
         _imageWriter.writeToImage();
     }
 }
