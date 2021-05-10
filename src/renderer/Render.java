@@ -9,9 +9,11 @@ import scene.Scene;
 import java.util.List;
 import java.util.MissingResourceException;
 
+/**
+ * this class create the image's color matrix from the scene
+ */
 public class Render {
     private ImageWriter _imageWriter;
-   // private Scene _scene;
     private  Camera _camera;
     private RayTracerBase _rayTracer;
 
@@ -21,10 +23,6 @@ public class Render {
         return this;
     }
 
-    /*public Render setScene(Scene scene) {
-        _scene=scene;
-        return  this;
-    }*/
 
     public Render setCamera(Camera camera) {
         _camera=camera;
@@ -37,13 +35,14 @@ public class Render {
     }
 
     /**
-     * this function check calculate the color of each pixel, and color it
+     * this function  calculate the color of each pixel, and color it
      */
     public void renderImage() {
         //check that all the field is not null
         if(_imageWriter==null||_camera==null||_rayTracer==null){
-            throw new MissingResourceException("","render","");
+            throw new MissingResourceException("one or more field in render is null","render","");
         }
+        //calculate and paint all the pixels
         int nX= _imageWriter.getNx();
         int nY= _imageWriter.getNy();
         for (int i = 0; i < nY; i++) {

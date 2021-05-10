@@ -7,6 +7,9 @@ import primitives.Point3D;
 
 import java.awt.*;
 
+/**
+ * include the picture properties
+ */
 public class Scene {
     private final String _name;
     /**

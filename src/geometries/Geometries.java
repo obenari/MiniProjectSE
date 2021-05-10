@@ -22,7 +22,6 @@ public class Geometries implements Intersectable{
         add(listOfGeometries);
     }
     public void add(Intersectable... geometries){
-        _listOfGeometries=new LinkedList<>();
         Collections.addAll(_listOfGeometries,geometries );
     }
 
