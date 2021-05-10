@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Geometries implements Intersectable{
-    private List<Intersectable> _listOfGeometries;
+    private List<Intersectable> _listOfGeometries = null;
 
     public Geometries() {
         _listOfGeometries=new LinkedList<>();
@@ -22,6 +22,7 @@ public class Geometries implements Intersectable{
         add(listOfGeometries);
     }
     public void add(Intersectable... geometries){
+        _listOfGeometries=new LinkedList<>();
         Collections.addAll(_listOfGeometries,geometries );
     }
 

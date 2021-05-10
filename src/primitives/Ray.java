@@ -1,4 +1,5 @@
 package primitives;
+import java.util.List;
 import java.util.Objects;
 /**
  *this class represent a ray in 3D Cartesian coordinate
@@ -48,5 +49,21 @@ public class Ray {
      */
     public Point3D getPoint(double t){
         return _p0.add(_dir.scale(t));
+    }
+
+    public Point3D getClosestPoint(List<Point3D> intersections) {
+        Point3D result=null;
+        if (intersections==null){
+            return  null;
+        }
+        double distance=Double.MAX_VALUE;
+        for (Point3D p:intersections) {
+            double newDis=_p0.distance(p);
+            if (newDis<distance){
+                distance=newDis;
+                result=p;
+            }
+        }
+        return result;
     }
 }
