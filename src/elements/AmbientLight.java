@@ -5,15 +5,15 @@ import primitives.Color;
 /**
  *
  */
-public class AmbientLight {
+public class AmbientLight extends Light{
 
-    private final Color _intensity;
+
 
     /**
      * default constructor with initialize with black
      */
     public AmbientLight() {
-        _intensity= Color.BLACK;
+        super( Color.BLACK);
     }
 
     /**
@@ -22,12 +22,10 @@ public class AmbientLight {
      * @param Ka reduction coefficient
      */
     public AmbientLight(Color Ia, double Ka) {
-        _intensity = Ia.scale(Ka);
+        super(Ia.scale(Ka));
     }
 
-    public Color getIntensity() {
-        return _intensity;
-    }
+
 
 
 }

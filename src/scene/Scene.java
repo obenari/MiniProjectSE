@@ -1,11 +1,14 @@
 package scene;
 
 import elements.AmbientLight;
+import elements.LightSource;
 import geometries.Geometries;
 import primitives.Color;
 import primitives.Point3D;
 
 import java.awt.*;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * include the picture properties
@@ -24,6 +27,10 @@ public class Scene {
      * collection of geometries in scene
      */
     public Geometries geometries;
+    /**
+     * collection of lights in scene
+     */
+    public List<LightSource> lights=new LinkedList<LightSource>();
 
     /**
      * initialize all the field to default values except the name
