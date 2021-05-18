@@ -13,7 +13,7 @@ import static primitives.Util.alignZero;
  * system
  * @author Odelia Ben Ari
  */
-public class Sphere implements Geometry{
+public class Sphere extends Geometry{
  Point3D _center;
  double _radius;
 
@@ -41,12 +41,12 @@ public class Sphere implements Geometry{
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
         Point3D p0=ray.getP0();
         Point3D O=_center;
         Vector V=ray.getDir();
         if (p0.equals(O)){
-            return (List.of(ray.getPoint(_radius)));
+            return (List.of(new GeoPoint(this,ray.getPoint(_radius))));
         }
         Vector U=O.subtract(p0);
         double tm= V.dotProduct(U);
@@ -61,11 +61,11 @@ public class Sphere implements Geometry{
         if(t1>0 && t2>0){
             Point3D p1= ray.getPoint(t1);
             Point3D p2= ray.getPoint(t2);
-            return List.of(p1,p2);
+            return List.of(new GeoPoint(this,p1),new GeoPoint(this,p2));
         }
         if (t2>0){
             Point3D p2= ray.getPoint(t2);
-            return List.of(p2);
+            return List.of(new GeoPoint(this,p2));
         }
         //it impossible t2<0 and t1>0
         return null;

@@ -24,8 +24,8 @@ public class Triangle extends Polygon{
                 '}';
     }
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
-        var intersection=plane.findIntersections(ray);
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        var intersection=plane.findGeoIntersections(ray);
         if (intersection==null)//there is no untersections with the plane
             return null;
         //now we check if the intersection with the plane is in the triangle
@@ -44,7 +44,7 @@ public class Triangle extends Polygon{
         double t2= N2.dotProduct(v);
         double t3= N3.dotProduct(v);
         if (t1>0 &&t2>0 &&t3>0 || t1<0 &&t2<0 &&t3<0)
-            return intersection;
+            return List.of(new GeoPoint (this,intersection.get(0).point));
         return null;
 
     }

@@ -14,7 +14,7 @@ import static primitives.Util.isZero;
  *
  * @author Odelia Ben Ari
  */
-public class Tube implements Geometry {
+public class Tube extends Geometry {
     Ray _axisRay;
     double _radius;
 
@@ -52,8 +52,9 @@ public class Tube implements Geometry {
         return point.subtract(p1).normalize();
     }
 
+
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
         return null;
     }
 }

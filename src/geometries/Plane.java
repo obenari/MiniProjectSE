@@ -15,7 +15,7 @@ import static primitives.Util.alignZero;
  *
  * @author Odelia Ben Ari
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
     Point3D _p0;
     Vector _normal;
 
@@ -63,8 +63,13 @@ public class Plane implements Geometry {
                 '}';
     }
 
+    /**
+     * return list of GeoIntersections with one or more geometries
+     * @param ray
+     * @return
+     */
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
         if (_p0.equals(ray.getP0()))//if the start of the ray equals to the plane point there is no intersections
             return null;
         Vector V=_p0.subtract(ray.getP0());
@@ -74,7 +79,7 @@ public class Plane implements Geometry {
         double t=(alignZero(_normal.dotProduct(V)))/(denominator);
         if (t<=0)
             return null;
-        return List.of(ray.getPoint(t));
+        return List.of(new GeoPoint(this,ray.getPoint(t)));
     }
 
 }
