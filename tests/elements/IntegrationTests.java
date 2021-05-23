@@ -1,6 +1,5 @@
 package elements;
 
-import elements.Camera;
 import geometries.Geometry;
 import geometries.Plane;
 import geometries.Sphere;
@@ -43,7 +42,7 @@ public class IntegrationTests {
         //view plain size is odd
 
         //TC01= camera is before the sphere and one ray has intersection with the sphere(2 points)
-        Sphere sphere = new Sphere(new Point3D(0, 0, -3), 1);
+        Sphere sphere = new Sphere(1, new Point3D(0, 0, -3));
         Camera camera = new Camera(Point3D.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0))
                 .setDistance(1)
                 .setViewPlaneSize(3, 3);
@@ -51,7 +50,7 @@ public class IntegrationTests {
         assertEquals(allPoints.size(), 2, "wrong number of points TC01");
 
         //TC02= camera is before the sphere and all rays has 2 intersection with the sphere(18 points)
-        sphere = new Sphere(new Point3D(0, 0, -2.5), 2.5);
+        sphere = new Sphere(2.5, new Point3D(0, 0, -2.5));
         camera = new Camera(new Point3D(0, 0, 0.5), new Vector(0, 0, -1), new Vector(0, 1, 0))
                 .setDistance(1)
                 .setViewPlaneSize(3, 3);
@@ -59,14 +58,14 @@ public class IntegrationTests {
         assertEquals(allPoints.size(), 18, "wrong number of points TC02");
 
         //TC03= camera is before the sphere some of rays has 2 intersection with the sphere(10 points)
-        sphere = new Sphere(new Point3D(0, 0, -2), 2);
+        sphere = new Sphere(2, new Point3D(0, 0, -2));
         camera = new Camera(new Point3D(0, 0, 0.5), new Vector(0, 0, -1), new Vector(0, 1, 0))
                 .setDistance(1)
                 .setViewPlaneSize(3, 3);
         allPoints = listOfIntersectionsThroughAllPixels(3, camera, sphere);
         assertEquals(allPoints.size(), 10, "wrong number of points TC03");
 //TC04= camera is in the sphere all rays has 1 intersection with the sphere(9 points)
-        sphere = new Sphere(new Point3D(0, 0, 0), 4);
+        sphere = new Sphere(4, new Point3D(0, 0, 0));
         camera = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, -1), new Vector(0, 1, 0))
                 .setDistance(1)
                 .setViewPlaneSize(3, 3);
@@ -74,7 +73,7 @@ public class IntegrationTests {
         assertEquals(allPoints.size(), 9, "wrong number of points TC04");
 
 //TC05= camera is after the sphere all rays hasn't  intersection with the sphere(0 points)
-        sphere = new Sphere(new Point3D(0, 0, 1), 0.5);
+        sphere = new Sphere(0.5, new Point3D(0, 0, 1));
         camera = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, -1), new Vector(0, 1, 0))
                 .setDistance(1)
                 .setViewPlaneSize(3, 3);
@@ -84,7 +83,7 @@ public class IntegrationTests {
         //------ view plain size is even--------------
 
         //TC06= camera is before the sphere and all rays has 2 intersection with the sphere(18 points)
-        sphere = new Sphere(new Point3D(0, 0, -100), 100);
+        sphere = new Sphere(100, new Point3D(0, 0, -100));
         camera = new Camera(new Point3D(0, 0, 0.5), new Vector(0, 0, -1), new Vector(0, 1, 0))
                 .setDistance(1)
                 .setViewPlaneSize(4, 4);

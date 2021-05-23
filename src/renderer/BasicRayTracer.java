@@ -13,6 +13,8 @@ import java.util.List;
  * this class extends RayTracerBase
  */
 public class BasicRayTracer extends RayTracerBase{
+    private static final double DELTA = 0.1;
+
     /**
      * initialize the field scene
      * @param scene
@@ -59,12 +61,25 @@ public class BasicRayTracer extends RayTracerBase{
             Vector l = lightSource.getL(geoPoint.point);
             double nl = alignZero(n.dotProduct(l));
             if (nl * nv > 0) { // sign(nl) == sing(nv)
-                Color lightIntensity = lightSource.getIntensity(geoPoint.point);
-                color = color.add(calcDiffusive(kd, l, n, lightIntensity),
-                        calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                if (unshaded(lightSource,geoPoint)) {
+                    Color lightIntensity = lightSource.getIntensity(geoPoint.point);
+                    color = color.add(calcDiffusive(kd, l, n, lightIntensity),
+                            calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                }
             }
         }
         return color;
+    }
+
+    private boolean unshaded(LightSource lightSource, GeoPoint geoPoint) {
+        Point3D point=geoPoint.point;
+        Vector l=lightSource.getL(point).scale(-1).normalized();
+        Vector n=geoPoint.geometry.getNormal(point);
+        Vector delta=n.scale(n.dotProduct(l)>0 ? DELTA :-DELTA);
+        point=point.add(delta);
+        Ray lightRay=new Ray(point,l);//ray from the point to the ray
+        List<GeoPoint > intersections = _scene.geometries.findGeoIntersections(lightRay,lightSource.getDistance(point));
+        return intersections == null;
     }
 
     /**
@@ -80,7 +95,7 @@ public class BasicRayTracer extends RayTracerBase{
     private Color calcSpecular(double ks, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
 
         Vector r=l.subtract(n.scale(2*(l.dotProduct(n)))).normalize();
-        double minusVR=v.normalized().scale(-1).dotProduct(r);
+        double minusVR=alignZero(v.normalized().scale(-1).dotProduct(r));////
         return lightIntensity.scale(ks*Math.max(0, Math.pow(minusVR,nShininess)));
     }
 

@@ -11,7 +11,7 @@ class SphereTest {
 
     @Test
     void testGetNormal() {
-        Sphere sphere = new Sphere(new Point3D(1,2,3),2);
+        Sphere sphere = new Sphere(2, new Point3D(1,2,3));
         Point3D p1=new Point3D(3,2,3);
         Vector result=new Vector(2,0,0).normalize();
         Vector normal=sphere.getNormal(p1);
@@ -20,7 +20,7 @@ class SphereTest {
 
     @Test
     void testFindIntersections() {
-        Sphere sphere = new Sphere(new Point3D(1, 0, 0), 1d);
+        Sphere sphere = new Sphere(1d, new Point3D(1, 0, 0));
 
         // ============ Equivalence Partitions Tests ==============
 

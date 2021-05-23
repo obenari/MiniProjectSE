@@ -4,11 +4,14 @@ import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
 
+/**
+ * todo
+ */
 public class PointLight extends Light implements LightSource {
     private final Point3D _position;
-    private double _kc =1;
-    private double _kl =0;
-    private double _kq =0;
+    private double _kc =1d;
+    private double _kl =0d;
+    private double _kq =0d;
 
 
     /**
@@ -71,6 +74,12 @@ public class PointLight extends Light implements LightSource {
      */
     @Override
     public Vector getL(Point3D point) {
+
         return point.subtract(_position).normalize();
+    }
+
+    @Override
+    public double getDistance(Point3D point) {
+        return _position.distance(point);
     }
 }

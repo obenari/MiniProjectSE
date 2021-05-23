@@ -33,7 +33,7 @@ public class SpotLight extends PointLight{
     @Override
     public Color getIntensity(Point3D point3D) {
         Vector l=getL(point3D);
-        Color intensity  =super.getIntensity();
+        Color intensity  =super.getIntensity(point3D);
         //calculate the attenuation according to the direction
         return intensity.scale(Math.max(0, l.dotProduct(_centerDirection)));
 

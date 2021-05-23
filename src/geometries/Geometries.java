@@ -47,13 +47,14 @@ public class Geometries implements Intersectable{
      * this methode calculate the intersections between ray and geometries
      * \and has an information about the geometry.
      * @param ray
+     * @param maxDistance the maxDistance between the start of the ray and the geometries
      * @return list of geoPoint intersections
      */
     @Override
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         List<GeoPoint> result=null;
         for(Intersectable geo: _listOfGeometries){
-            List<GeoPoint> geoPoints=geo.findGeoIntersections(ray);
+            List<GeoPoint> geoPoints=geo.findGeoIntersections(ray,maxDistance);
             if(geoPoints != null){
                 if (result==null){
                     result=new LinkedList<>();

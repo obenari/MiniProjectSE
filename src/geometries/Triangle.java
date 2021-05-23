@@ -24,9 +24,9 @@ public class Triangle extends Polygon{
                 '}';
     }
     @Override
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
-        var intersection=plane.findGeoIntersections(ray);
-        if (intersection==null)//there is no untersections with the plane
+    public List<GeoPoint> findGeoIntersections(Ray ray,double maxDistance) {
+        var intersection=plane.findGeoIntersections(ray,maxDistance);
+        if (intersection==null)//there is no intersections with the plane
             return null;
         //now we check if the intersection with the plane is in the triangle
         Point3D p0= ray.getP0();
