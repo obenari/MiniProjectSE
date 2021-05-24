@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author Odelia Ben Ari
  */
 public class Ray {
+    private static final double DELTA = 0.1;
     final Point3D _p0;
     final Vector _dir;
 
@@ -24,7 +25,11 @@ public class Ray {
         _dir = dir.normalized();
     }
 
-
+    public Ray(Point3D head, Vector direction, Vector normal){
+        Vector delta = normal.scale(normal.dotProduct(direction) > 0 ? DELTA : -DELTA);
+        _p0 = head.add(delta);
+        _dir=direction;
+    }
     public Point3D getP0() {
         return _p0;
     }

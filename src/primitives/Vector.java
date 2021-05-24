@@ -29,8 +29,10 @@ public class Vector {
      */
     public Vector(double x, double y, double z) {
         Point3D head = new Point3D(x, y, z);
-        if (ZERO.equals(head))
+        if (ZERO.equals(head)) {
+            System.out.println(head);
             throw new IllegalArgumentException("cannot create the vector (0,0,0)");
+        }
         _head = head;
     }
 
