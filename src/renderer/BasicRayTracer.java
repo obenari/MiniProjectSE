@@ -118,7 +118,7 @@ public class BasicRayTracer extends RayTracerBase {
             return new Ray(geoPoint.point, v,n);
         }
         Vector r = v.subtract(n.scale(2 * v.dotProduct(n)));//the reflected ray
-        return new Ray(geoPoint.point, r);
+        return new Ray(geoPoint.point, r,n);
     }
 //    private Color calcColor(GeoPoint geoPoint, Ray ray) {
 //

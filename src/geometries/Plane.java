@@ -76,7 +76,7 @@ public class Plane extends Geometry {
         double denominator=alignZero(_normal.dotProduct(ray.getDir()));
         if (denominator==0)//the ray is parallel to the plane
             return null;
-        double t=(alignZero(_normal.dotProduct(V)))/(denominator);
+        double t=alignZero(_normal.dotProduct(V)/denominator);
         if (t>0 && alignZero (t-maxDistance ) <= 0 )
             return List.of(new GeoPoint(this,ray.getPoint(t)));
 
