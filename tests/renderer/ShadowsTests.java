@@ -141,7 +141,7 @@ public class ShadowsTests {
                         .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(30)), //
                 new Triangle(new Point3D(-56.05, -18.65, 0), new Point3D(-20.33, -52.71, 0), new Point3D(-51.07, -48.74, -4)) //
                         .setEmission(new Color(java.awt.Color.BLUE)) //
-                        .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(30).setkT(0.5)) //
+                        .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(30)) //
         );
         scene.lights.add( //
                 new SpotLight(new Color(400, 240, 0), new Point3D(-100, -100, 200), new Vector(1, 1, -3)) //
