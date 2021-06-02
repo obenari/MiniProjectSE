@@ -52,7 +52,18 @@ public class Vector {
 
         return _head;
     }
+    public double getX() {
 
+        return _head.getX();
+    }
+    public double getY() {
+
+        return _head.getY();
+    }
+    public double getZ() {
+
+        return _head.getZ();
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

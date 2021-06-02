@@ -29,8 +29,8 @@ public class Render {
         return  this;
     }
 
-    public Render setRayTracer(BasicRayTracer basicRayTracer) {
-        _rayTracer=basicRayTracer;
+    public Render setRayTracer(RayTracerBase rayTracer) {
+        _rayTracer=rayTracer;
         return  this;
     }
 
@@ -47,6 +47,9 @@ public class Render {
         int nY= _imageWriter.getNy();
         for (int i = 0; i < nY; i++) {
             for (int j = 0; j < nX; j++) {
+               // if(i==145&&j==115){
+                    System.out.println(i+"-"+j);
+             //   }
                 Ray ray=_camera.constructRayThroughPixel(nX,nY,j,i);
                 Color color =  _rayTracer.traceRay(ray);
              _imageWriter.writePixel(j,i,color);
