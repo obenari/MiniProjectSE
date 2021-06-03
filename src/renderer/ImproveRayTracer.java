@@ -51,7 +51,7 @@ public class ImproveRayTracer extends RayTracerBase {
      * @param geoPoint
      * @return the color of the point
      */
-    private Color calcColor(Intersectable.GeoPoint geoPoint, Ray ray) {
+    private Color calcColor(GeoPoint geoPoint, Ray ray) {
         return calcColor(geoPoint, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K)
                 .add(_scene.ambientLight.getIntensity());
     }
@@ -92,14 +92,14 @@ public class ImproveRayTracer extends RayTracerBase {
             for (Ray r : reflectedRayList) {
                 GeoPoint reflectedPoint = findClosestIntersection(r);
                 if (reflectedPoint != null) {
-                    Color color1 = calcColor(reflectedPoint, r, level - 1, kkr);//.scale(kr);
+                    Color color1 = calcColor(reflectedPoint, r, level - 1, kkr).scale(kr);
                     colorList.add(color1);
                 } else {
                     colorList.add(Color.BLACK);
                 }
             }
             Color averageColor = Color.average(colorList);
-            color = color.add(averageColor.scale(kr));
+            color = color.add(averageColor);//.scale(kr));
         }
         double kt = material.kT;
         double kkt = k * kt;
@@ -109,14 +109,14 @@ public class ImproveRayTracer extends RayTracerBase {
             for (Ray r : refractedRayList) {
                 GeoPoint refractedPoint = findClosestIntersection(r);
                 if (refractedPoint != null) {
-                    Color color1 = calcColor(refractedPoint, r, level - 1, kkt);//.scale(kt);
+                    Color color1 = calcColor(refractedPoint, r, level - 1, kkt).scale(kt);
                     colorList.add(color1);
                 } else {
                     colorList.add(Color.BLACK);
                 }
             }
             Color averageColor = Color.average(colorList);
-            color = color.add(averageColor.scale(kt));
+            color = color.add(averageColor);//.scale(kt));
         }
         return color;
     }
@@ -139,6 +139,7 @@ public class ImproveRayTracer extends RayTracerBase {
         Vector X = new Vector(-refractedVector.getZ(), 0, refractedVector.getX()).normalize();
         Vector Y = X.crossProduct(refractedVector).normalize();
         List<Ray> rayList = new LinkedList<>();
+        rayList.add(refractedRay);
         for (int i = 0; i < AMOUNT_OF_RAYS; i++) {
             double cos = Math.random() * 2 - 1;//value between -1 to 1
             double sin = Math.sqrt(1 - cos * cos);
@@ -152,7 +153,7 @@ public class ImproveRayTracer extends RayTracerBase {
             if (alignZero(y) != 0) {
                 point = Pc.add(Y.scale(y));
             }
-            refractedRay = new Ray(deltaPoint, point.subtract(deltaPoint));
+            refractedRay = new Ray(deltaPoint, point.subtract(geoPoint.point));////////////////
             //check if the new ray is a reflection ray
             double t = ray.getDir().dotProduct(n) * refractedRay.getDir().dotProduct(n);
             if (alignZero(t) > 0) {
@@ -181,6 +182,7 @@ public class ImproveRayTracer extends RayTracerBase {
         }
         Vector reflectedVector = v.subtract(n.scale(2 * v.dotProduct(n)));//the reflected vector
         Ray reflectedRay = new Ray(geoPoint.point, reflectedVector, n);//
+        rayList.add(reflectedRay);
         Point3D deltaPoint = reflectedRay.getP0();//the same point in geoPoint with Sliding in the Delta
         //We'll create the center point of the circle through which construct beam of rays
         Point3D Pc = deltaPoint.add(reflectedVector.scale(DISTANCE));
@@ -200,7 +202,7 @@ public class ImproveRayTracer extends RayTracerBase {
             if (alignZero(y) != 0) {
                 point = Pc.add(Y.scale(y));
             }
-            Ray ray1 = new Ray(deltaPoint, point.subtract(deltaPoint));
+            Ray ray1 = new Ray(deltaPoint, point.subtract(geoPoint.point));///////////
             //check if the new ray is a refraction ray
             double t = ray.getDir().dotProduct(n) * ray1.getDir().dotProduct(n);
             if (alignZero(t) < 0) {
