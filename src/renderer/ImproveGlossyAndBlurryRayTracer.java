@@ -1,8 +1,5 @@
 package renderer;
 
-import elements.LightSource;
-import geometries.Intersectable;
-
 import static geometries.Intersectable.GeoPoint;
 
 import primitives.*;
@@ -10,14 +7,13 @@ import scene.Scene;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import static primitives.Util.alignZero;
 
 /**
  * rayTracer class that Improve glossy and blurry
  */
-public class ImproveRayTracer extends RayTracerBase {
+public class ImproveGlossyAndBlurryRayTracer extends RayTracerBase {
     /**
      * the radius size of the target circle through construct the beam of rays
      */
@@ -37,7 +33,7 @@ public class ImproveRayTracer extends RayTracerBase {
      * @param RADIUS
      * @return
      */
-    public ImproveRayTracer setRADIUS(double RADIUS) {
+    public ImproveGlossyAndBlurryRayTracer setRADIUS(double RADIUS) {
         this.RADIUS = RADIUS;
         return this;
     }
@@ -48,7 +44,7 @@ public class ImproveRayTracer extends RayTracerBase {
      * @param DISTANCE
      * @return
      */
-    public ImproveRayTracer setDISTANCE(double DISTANCE) {
+    public ImproveGlossyAndBlurryRayTracer setDISTANCE(double DISTANCE) {
         this.DISTANCE = DISTANCE;
         return this;
     }
@@ -59,7 +55,7 @@ public class ImproveRayTracer extends RayTracerBase {
      * @param AMOUNT_OF_RAYS
      * @return
      */
-    public ImproveRayTracer setAMOUNT_OF_RAYS(double AMOUNT_OF_RAYS) {
+    public ImproveGlossyAndBlurryRayTracer setAMOUNT_OF_RAYS(double AMOUNT_OF_RAYS) {
         this.AMOUNT_OF_RAYS = AMOUNT_OF_RAYS;
         return this;
     }
@@ -69,7 +65,8 @@ public class ImproveRayTracer extends RayTracerBase {
      *
      * @param scene
      */
-    public ImproveRayTracer(Scene scene) {
+    public ImproveGlossyAndBlurryRayTracer(Scene scene) {
+
         super(scene);
     }
 
@@ -83,6 +80,7 @@ public class ImproveRayTracer extends RayTracerBase {
      * @param k        intensity of the refraction or reflection
      * @return
      */
+    @Override
     protected Color calcGlobalEffects(GeoPoint geoPoint, Ray ray, int level, double k) {
         Color color = Color.BLACK;
         Material material = geoPoint.geometry.getMaterial();
@@ -90,7 +88,7 @@ public class ImproveRayTracer extends RayTracerBase {
         double kkr = k * kr;
         //If the effect of reflection is negligible then do not add the color
         if (kkr > MIN_CALC_COLOR_K) {
-            List<Ray> reflectedRayList = constructReflectedRay(geoPoint, ray);//create beam of reflected rays
+            List<Ray> reflectedRayList = constructReflectedRays(geoPoint, ray);//create beam of reflected rays
             List<Color> colorList = new LinkedList<>();//create a list of colors that returned by these rays
             for (Ray r : reflectedRayList) {//run all over the rays and add the color of the ray intersection
                 GeoPoint reflectedPoint = findClosestIntersection(r);
@@ -109,7 +107,7 @@ public class ImproveRayTracer extends RayTracerBase {
         double kkt = k * kt;
         //If the effect of refraction is negligible then do not add the color
         if (kkt > MIN_CALC_COLOR_K) {
-            List<Ray> refractedRayList = constructRefractedRay(geoPoint, ray);//create beam of refracted rays
+            List<Ray> refractedRayList = constructRefractedRays(geoPoint, ray);//create beam of refracted rays
             List<Color> colorList = new LinkedList<>();//create a list of colors that returned by these rays
             for (Ray r : refractedRayList) {//run all over the rays and add the color of the ray intersection
                 GeoPoint refractedPoint = findClosestIntersection(r);
@@ -134,7 +132,8 @@ public class ImproveRayTracer extends RayTracerBase {
      * @param ray
      * @return
      */
-    private List<Ray> constructRefractedRay(GeoPoint geoPoint, Ray ray) {
+    private List<Ray> constructRefractedRays(GeoPoint geoPoint, Ray ray) {
+        //we don't call to constructRefractedRay in rayTracerBase to save run time
         Vector n = geoPoint.geometry.getNormal(geoPoint.point);
         Ray refractedRay = new Ray(geoPoint.point, ray.getDir(), n);
         Point3D deltaPoint = refractedRay.getP0();//the same point in geoPoint with Sliding in the Delta
@@ -176,7 +175,8 @@ public class ImproveRayTracer extends RayTracerBase {
      * @param ray
      * @return
      */
-    private List<Ray> constructReflectedRay(GeoPoint geoPoint, Ray ray) {
+    private List<Ray> constructReflectedRays(GeoPoint geoPoint, Ray ray) {
+        //we don't call to constructReflectedRay in rayTracerBase to save run time
         Vector n = geoPoint.geometry.getNormal(geoPoint.point);
         Vector v = ray.getDir();
         LinkedList<Ray> rayList = new LinkedList<Ray>();

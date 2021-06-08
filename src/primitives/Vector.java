@@ -5,10 +5,13 @@ import static primitives.Point3D.ZERO;
 /**
  **this class represent a vector in 3D Cartesian coordinate
  *  * system
- * @author Odelia Ben Ari
+ * @author Odelia Ben Ari and Talya Shmuelian
  */
 
 public class Vector {
+    /**
+     * the head of teh vector
+     */
     Point3D _head;
 
     /**
@@ -48,22 +51,46 @@ public class Vector {
         _head = head;
     }
 
+    /**
+     * get methode
+     * @return _head
+     */
     public Point3D getHead() {
-
         return _head;
     }
+
+    /**
+     * get methode
+     * @return
+     */
     public double getX() {
 
         return _head.getX();
     }
+
+    /**
+     * get methode
+     * @return
+     */
     public double getY() {
 
         return _head.getY();
     }
+
+    /**
+     * get methode
+     * @return
+     */
     public double getZ() {
 
         return _head.getZ();
     }
+
+    /**
+     * equal methode
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,7 +102,6 @@ public class Vector {
     @Override
     public String toString() {
         return  _head.toString();
-
     }
 
     /**
@@ -109,6 +135,7 @@ public class Vector {
      * @return
      */
     public double lengthSquared() {
+        //calculate x*x+y*y+z*z
         return  _head._x.coord * _head._x.coord +
                 _head._y.coord * _head._y.coord +
                 _head._z.coord * _head._z.coord;

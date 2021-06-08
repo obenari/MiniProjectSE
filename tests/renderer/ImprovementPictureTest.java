@@ -198,7 +198,7 @@ scene.lights.add( //
         Render render = new Render(). //
                 setImageWriter(new ImageWriter("check6Glossy", 400, 400)) //
                 .setCamera(camera) //
-                .setRayTracer(new ImproveRayTracer(scene));
+                .setRayTracer(new ImproveGlossyAndBlurryRayTracer(scene));
         render.renderImage();
         render.writeToImage();
     }
