@@ -134,7 +134,7 @@ public class Color {
                 g += c.g;
                 b += c.b;
             }
-            float size=colorList.size();
+            double size=colorList.size();
             Color color = new Color(r/size, g/size, b/size);
             return color;
         }
