@@ -14,6 +14,7 @@ public class PointLight extends Light implements LightSource {
     private double _kq =0d;
 
 
+
     /**
      * chaining methods
      * @param kc
@@ -52,6 +53,9 @@ public class PointLight extends Light implements LightSource {
     public PointLight(Color intensity, Point3D position) {
         super(intensity);
         _position = position;
+    }
+    public Point3D getPosition() {
+        return _position;
     }
 
     /**

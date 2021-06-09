@@ -47,6 +47,9 @@ public class Render {
         int nY = _imageWriter.getNy();
         for (int i = 0; i < nY; i++) {
             for (int j = 0; j < nX; j++) {
+                if(i==100&&j==100) {
+                    System.out.println(i + "-" + j);
+                }
                 System.out.println(i + "-" + j);
                 Ray ray = _camera.constructRayThroughPixel(nX, nY, j, i);
                 Color color = _rayTracer.traceRay(ray);

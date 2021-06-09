@@ -215,7 +215,7 @@ scene.lights.add( //
                 ,new Plane( new Point3D(30, -60, -150),new Vector(0,1,0)) //
                         .setEmission(new Color(20,0,0)) //
                         .setMaterial(new Material().setkD(0.5).setnShininess(80)),
-                new Triangle(new Point3D(30,100,0),new Point3D(-30,-40,0),new Point3D(90,-40,0))
+                new Triangle(new Point3D(30,100,200),new Point3D(-30,-40,200),new Point3D(90,-40,200))
                         .setEmission(new Color(20,20,20)) //
                         .setMaterial(new Material().setkD(0.3).setkS(0.3).setkT(0.4).setnShininess(80))
         );
@@ -227,9 +227,9 @@ scene.lights.add( //
                 ).setKl(0.0005).setKq(0.000005));
 
         Render render = new Render(). //
-                setImageWriter(new ImageWriter("triangleSphere", 400, 400)) //
+                setImageWriter(new ImageWriter("triangleSphereBl", 400, 400)) //
                 .setCamera(camera) //
-                .setRayTracer(new BasicRayTracer(scene));
+                .setRayTracer(new ImproveGlossyAndBlurryRayTracer(scene));
         render.renderImage();
         render.writeToImage();
     }

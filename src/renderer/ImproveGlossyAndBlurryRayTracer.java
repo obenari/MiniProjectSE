@@ -151,14 +151,14 @@ public class ImproveGlossyAndBlurryRayTracer extends RayTracerBase {
             double d = Math.random() * 2 * RADIUS - RADIUS;//value between -Radius to Radius
             double x = cos * d;
             double y = sin * d;
-            Point3D point = Pc;
+            Point3D targetPoint = Pc;
             if (alignZero(x) != 0) {
-                point = Pc.add(X.scale(x));
+                targetPoint = targetPoint.add(X.scale(x));
             }
             if (alignZero(y) != 0) {
-                point = Pc.add(Y.scale(y));
+                targetPoint = targetPoint.add(Y.scale(y));
             }
-            refractedRay = new Ray(deltaPoint, point.subtract(geoPoint.point));
+            refractedRay = new Ray(deltaPoint, targetPoint.subtract(geoPoint.point));
             //check if the new ray is a reflection ray
             double t = ray.getDir().dotProduct(n) * refractedRay.getDir().dotProduct(n);
             if (alignZero(t) > 0) {
