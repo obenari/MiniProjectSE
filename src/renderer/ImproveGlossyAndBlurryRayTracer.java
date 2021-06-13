@@ -13,7 +13,7 @@ import static primitives.Util.alignZero;
 /**
  * rayTracer class that Improve glossy and blurry
  */
-public class ImproveGlossyAndBlurryRayTracer extends RayTracerBase {
+public class ImproveGlossyAndBlurryRayTracer extends BasicRayTracer {
     /**
      * the radius size of the target circle through construct the beam of rays
      */
@@ -26,6 +26,15 @@ public class ImproveGlossyAndBlurryRayTracer extends RayTracerBase {
      * the amount of rays in the beam
      */
     private double AMOUNT_OF_RAYS = 50;
+    /**
+     * initialize the field scene
+     *
+     * @param scene
+     */
+    public ImproveGlossyAndBlurryRayTracer(Scene scene) {
+
+        super(scene);
+    }
 
     /**
      * chaining methode
@@ -60,15 +69,6 @@ public class ImproveGlossyAndBlurryRayTracer extends RayTracerBase {
         return this;
     }
 
-    /**
-     * initialize the field scene
-     *
-     * @param scene
-     */
-    public ImproveGlossyAndBlurryRayTracer(Scene scene) {
-
-        super(scene);
-    }
 
 
     /**

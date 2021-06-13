@@ -439,9 +439,9 @@ class ImproveSoftShadowRayTracerTest {
 
 
         Render render = new Render(). //
-                setImageWriter(new ImageWriter("realisticDiamond", 400, 400)) //
+                setImageWriter(new ImageWriter("realisticDiamondGlossy", 400, 400)) //
                 .setCamera(camera) //
-                .setRayTracer(new BasicRayTracer(scene));
+                .setRayTracer(new ImproveGlossyAndBlurryRayTracer(scene));
         render.renderImage();
         render.writeToImage();
     }
