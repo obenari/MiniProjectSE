@@ -90,4 +90,9 @@ public class Polygon extends Geometry {
     public List<GeoPoint> findGeoIntersections(Ray ray,double maxDistance) {
         return null;
     }
+
+    @Override
+    void initBox() {
+
+    }
 }

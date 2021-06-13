@@ -22,6 +22,7 @@ public class Plane extends Geometry {
     public Plane(Point3D p0, Vector normal) {
         _p0 = p0;
         _normal = normal.normalized();
+        initBox();
     }
 
     public Plane(Point3D p1, Point3D p2, Point3D p3) {
@@ -41,8 +42,13 @@ public class Plane extends Geometry {
         } catch (IllegalArgumentException ex) {
             throw new IllegalArgumentException("the plane cannot get 3 point in the same line");
         }
+        initBox();
     }
-
+    @Override
+    void initBox() {
+        double infinity=Double.POSITIVE_INFINITY;
+        _box=new AABB(new Point3D(-infinity,-infinity,-infinity),new Point3D(infinity,infinity,infinity));
+    }
     public Point3D getP0() {
         return _p0;
     }
@@ -82,5 +88,7 @@ public class Plane extends Geometry {
 
         return null;
     }
+
+
 
 }

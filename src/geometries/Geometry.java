@@ -8,13 +8,18 @@ import primitives.Vector;
  *this interface represent a geometry
  * @author Odelia Ben Ari
  */
-public abstract class Geometry implements Intersectable{
+public abstract class Geometry extends Intersectable{
 
      protected Color _emission=Color.BLACK;
 
 
 
      protected Material _material=new Material();
+
+//     public Geometry(AABB box) {
+//          super(box);
+//     }
+
      public Color getEmission() {
           return _emission;
      }

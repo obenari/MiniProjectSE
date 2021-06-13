@@ -10,7 +10,13 @@ import java.util.stream.Collectors;
 /**
  * \interface for geometries that Intersectable
  */
-public interface Intersectable {
+public abstract class Intersectable {
+    protected AABB _box;
+
+//    public Intersectable(AABB box) {
+//        _box=box;
+//    }
+
     /**
      * this class is PDS
      */
@@ -32,12 +38,13 @@ public interface Intersectable {
         }
 
     }
+
     /**
      * return list of Intersections with one or more geometries
      * @param ray
      * @return
      */
-    default List<Point3D> findIntersections(Ray ray) {
+    public List<Point3D> findIntersections(Ray ray) {
         List<GeoPoint> geoList = findGeoIntersections(ray);
         return geoList == null ? null
                 : geoList .stream()
@@ -50,7 +57,7 @@ public interface Intersectable {
      * @param ray
      * @return
      */
-   default List<GeoPoint> findGeoIntersections(Ray ray){
+   public List<GeoPoint> findGeoIntersections(Ray ray){
        return findGeoIntersections(ray,Double.POSITIVE_INFINITY);
    }
 
@@ -61,5 +68,6 @@ public interface Intersectable {
      * @param maxDistance
      * @return
      */
-    List<GeoPoint> findGeoIntersections(Ray ray,double maxDistance);
+   abstract List<GeoPoint> findGeoIntersections(Ray ray,double maxDistance);
+   abstract void initBox();
 }

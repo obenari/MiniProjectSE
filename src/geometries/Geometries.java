@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * this class keep a list of geometries.
  */
-public class Geometries implements Intersectable{
+public class Geometries extends Intersectable{
     /**
      * keep a list of geometries.
      */
@@ -40,6 +40,7 @@ public class Geometries implements Intersectable{
      */
     public void add(Intersectable... geometries){
         Collections.addAll(_listOfGeometries,geometries );
+        initBox();
     }
 
 
@@ -63,6 +64,11 @@ public class Geometries implements Intersectable{
             }
         }
         return result;
+    }
+
+    @Override
+    void initBox() {////////////////////////////
+
     }
 
 
