@@ -26,6 +26,7 @@ public class ImproveGlossyAndBlurryRayTracer extends BasicRayTracer {
      * the amount of rays in the beam
      */
     private double AMOUNT_OF_RAYS = 50;
+
     /**
      * initialize the field scene
      *
@@ -68,7 +69,6 @@ public class ImproveGlossyAndBlurryRayTracer extends BasicRayTracer {
         this.AMOUNT_OF_RAYS = AMOUNT_OF_RAYS;
         return this;
     }
-
 
 
     /**

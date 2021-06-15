@@ -471,15 +471,15 @@ public class ImprovementPictureTest {
         //  new Sphere(1,new Point3D(1.5,-0.1,1.8)).setEmission(new Color(50,50,50)).setMaterial(new Material().setkD(0.1).setkS(0.1).setkT(0.5))));
 
         scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
-        scene.lights.add(
-                new PointLight(new Color(200, 100, 50), new Point3D(0, 0, -50)) //
-                        .setKl(0.0001).setKq(0.00001));
-        scene.lights.add(
-                new SpotLight(new Color(200, 100, 50), new Point3D(0.04, -5, 1.17), new Vector(-0.5, 0, 1) //
-                ).setKl(0.0005).setKq(0.000005));
-        scene.lights.add(
-                new PointLight(new Color(200, 100, 50), new Point3D(0.04, -1, 1.17)) //
-                        .setKl(0.0001).setKq(0.00001));
+//        scene.lights.add(
+//                new PointLight(new Color(200, 100, 50), new Point3D(0, 0, -50)) //
+//                        .setKl(0.0001).setKq(0.00001));
+//        scene.lights.add(
+//                new SpotLight(new Color(200, 100, 50), new Point3D(0.04, -5, 1.17), new Vector(-0.5, 0, 1) //
+//                ).setKl(0.0005).setKq(0.000005));
+//        scene.lights.add(
+//                new PointLight(new Color(200, 100, 50), new Point3D(0.04, -1, 1.17)) //
+//                        .setKl(0.0001).setKq(0.00001));
         scene.lights.add(
                 new PointLight(new Color(200, 100, 50), new Point3D(-2, -1, 0)) //
                         .setKl(0.0001).setKq(0.00001));
@@ -494,9 +494,9 @@ public class ImprovementPictureTest {
 
 
         Render render = new Render(). //
-                setImageWriter(new ImageWriter("diamondsoft", 400, 400)) //
-                .setCamera(camera) //
-                .setRayTracer(new ImproveSoftShadowRayTracer(scene).setRADIUS(3));
+                setImageWriter(new ImageWriter("diamondsoft1", 400, 400)) //
+                .setCamera(camera)
+                .setRayTracer(new BasicRayTracer(scene)).setDebugPrint().setMultithreading(3);
         render.renderImage();
         render.writeToImage();
 

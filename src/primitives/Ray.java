@@ -37,26 +37,30 @@ public class Ray {
 
     /**
      * create ray by moving _p0 in delta
+     *
      * @param head
      * @param direction
-     * @param normal the direction to move _p0
+     * @param normal    the direction to move _p0
      */
-    public Ray(Point3D head, Vector direction, Vector normal){
+    public Ray(Point3D head, Vector direction, Vector normal) {
         Vector delta = normal.scale(normal.dotProduct(direction) > 0 ? DELTA : -DELTA);
         _p0 = head.add(delta);
-        _dir=direction.normalized();
+        _dir = direction.normalized();
     }
 
     /**
      * get methode
+     *
      * @return _p0
      */
     public Point3D getP0() {
 
         return _p0;
     }
+
     /**
      * get methode
+     *
      * @return ray direction
      */
     public Vector getDir() {
@@ -66,6 +70,7 @@ public class Ray {
 
     /**
      * equal methode
+     *
      * @param o
      * @return
      */
@@ -94,6 +99,7 @@ public class Ray {
 
     /**
      * calculate the closest point to the start of the ray
+     *
      * @param intersections
      * @return
      */
@@ -115,6 +121,7 @@ public class Ray {
 
     /**
      * calculate the closest point to the start of the ray
+     *
      * @param geoPointList
      * @return
      */

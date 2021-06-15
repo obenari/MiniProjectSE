@@ -8,133 +8,179 @@ import java.util.List;
 
 import static primitives.Util.alignZero;
 
+/**
+ * the class represent an Axis Aligned Bounding Box (AABB)
+ * An algorithm designed to improve running time,
+ * instead of checking intersections between ray and all the geometries in the scene.
+ * We'll put the geometries in boxes , unify boxes and see if there's an intersection between a ray and a box.
+ */
 public class AABB {
+    /**
+     * the minimum point in the box
+     */
     final Point3D _min;
+    /**
+     * the maximum point in the box
+     */
     final Point3D _max;
 
-
+    /**
+     * constructor
+     *
+     * @param min the minimum point in the box
+     * @param max the maximum point in the box
+     */
     public AABB(Point3D min, Point3D max) {
         _min = min;
         _max = max;
     }
 
-    AABB
-    Union(List<Point3D> points) {
+    /**
+     * calculate the min and max point to the new box that contain the boxes,and create the box
+     *
+     * @param boxes
+     * @return
+     */
+    static AABB Union(List<AABB> boxes) {
+        if (boxes.size() == 0) {
+            return null;
+        }
+        double xMin = Double.POSITIVE_INFINITY;
+        double yMin = Double.POSITIVE_INFINITY;
+        double zMin = Double.POSITIVE_INFINITY;
+        double xMax = Double.NEGATIVE_INFINITY;
+        double yMax = Double.NEGATIVE_INFINITY;
+        double zMax = Double.NEGATIVE_INFINITY;
 
-        //  AABB bounds = new AABB();
-        double xMin = 0;
-        double yMin = 0;
-        double zMin = 0;
-        double xMax = 0;
-        double yMax = 0;
-        double zMax = 0;
-        if (points.size() > 0) {
-            Point3D point = points.get(0);
-            xMin = point.getX();
-            yMin = point.getY();
-            zMin = point.getZ();
-            xMax = point.getX();
-            yMax = point.getY();
-            zMax = point.getZ();
 
-            //Iterate over points and log the biggest and smallest dimensions
-
-            for (Point3D p : points) {
-                if (p.getX() < xMin) {
-                    xMin = p.getX();
-                }
-                if (p.getY() < yMin) {
-                    yMin = p.getY();
-                }
-                if (p.getZ() < zMin) {
-                    zMin = p.getZ();
-                }
-
-                if (p.getX() > xMax) {
-                    xMax = p.getX();
-                }
-                if (p.getY() > yMax) {
-                    yMax = p.getY();
-                }
-                if (p.getZ() > zMax) {
-                    zMax = p.getZ();
-                }
-
+        //Iterate over points and find the biggest and smallest points
+        for (AABB b : boxes) {
+            if (b._min.getX() < xMin) {
+                xMin = b._min.getX();
+            }
+            if (b._min.getY() < yMin) {
+                yMin = b._min.getY();
+            }
+            if (b._min.getZ() < zMin) {
+                zMin = b._min.getZ();
+            }
+            if (b._max.getX() > xMax) {
+                xMax = b._max.getX();
+            }
+            if (b._max.getY() > yMax) {
+                yMax = b._max.getY();
+            }
+            if (b._max.getZ() > zMax) {
+                zMax = b._max.getZ();
             }
 
         }
-
         return new AABB(new Point3D(xMin, yMin, zMin), new Point3D(xMax, yMax, zMax));
+
     }
 
-    double surfaceArea(AABB A) {
-        Vector d = A._max.subtract(A._min);
-        return 2.d * (d.getX() * d.getY() + d.getY() * d.getZ() + d.getZ() * d.getX());
-    }
 
     /**
-     * this function check if there are intersection between the box and the ray
+     * this function check if there is intersection between the box and the ray
+     *
      * @param ray
      * @return
      */
     public boolean hit(Ray ray) {
         Point3D p0 = ray.getP0();
-        Vector dir = ray.getDir();
-        double[] xt = CheckAxis(1, p0.getX(), dir.getX());
-        double[] yt = CheckAxis(2, p0.getY(), dir.getY());
-        double[] zt = CheckAxis(3, p0.getZ(), dir.getZ());
+        double p0X = p0.getX();
+        double p0Y = p0.getY();
+        double p0Z = p0.getZ();
+        Vector direction = ray.getDir();
+        double directionX = direction.getX();
+        double directionY = direction.getY();
+        double directionZ = direction.getZ();
 
-        double tMin = Math.max(Math.max(xt[0], yt[0]), zt[0]);
-        double tMax = Math.min(Math.min(xt[1], yt[1]), zt[1]);
-
-        // List<Intersection> xs = new List<Intersection>();
-
-        //Box not hit
-        if (tMin > tMax) {
-            return false;
-        }
-
-        //Box hit
-        return true;
-    }
-
-    public double[] CheckAxis(int axis, double origin, double direction) {
-        double[] t = new double[2];
-
-        double tMinNumerator = 0.0;
-        double tMaxNumerator = 0.0;
-
-        switch (axis) {
-            case 1:
-                tMinNumerator = (_min.getX() - origin);
-                tMaxNumerator = (_max.getX() - origin);
-                break;
-            case 2:
-                tMinNumerator = (_min.getY() - origin);
-                tMaxNumerator = (_max.getZ() - origin);
-                break;
-            case 3:
-                tMinNumerator = (_min.getZ() - origin);
-                tMaxNumerator = (_max.getZ() - origin);
-                break;
-        }
-
-        //Infinities might pop here due to division by zero
-        if (alignZero(direction) != 0) {
-            t[0] = tMinNumerator / direction;
-            t[1] = tMaxNumerator / direction;
+        double maxX;
+        double minX;
+//if the directionX is negative, then the min x in the box is maximal
+        if (directionX < 0) {
+            maxX = (_min.getX() - p0X) / directionX;
+            //check if the geometry is behind the camera
+            if (maxX <= 0)
+                return false;
+            minX = (_max.getX() - p0X) / directionX;
+        } else if (directionX > 0) {//
+            maxX = (_max.getX() - p0X) / directionX;
+            if (maxX <= 0)
+                return false;
+            minX = (_min.getX() - p0X) / directionX;
         } else {
-            t[0] = tMinNumerator * Double.POSITIVE_INFINITY;
-            t[1] = tMaxNumerator * Double.POSITIVE_INFINITY;
+            if (p0X >= _max.getX() || p0X <= _min.getX())
+                return false;
+            else {
+                maxX = Double.POSITIVE_INFINITY;
+                minX = Double.NEGATIVE_INFINITY;
+            }
         }
 
-        if (t[0] > t[1]) {
-            double temp = t[0];
-            t[0] = t[1];
-            t[1] = temp;
+        double maxY;
+        double minY;
+
+//if the directionY is negative, then the min Y in the box is maximal
+        if (directionY < 0) {
+            maxY = (_min.getY() - p0Y) / directionY;
+            //check if the geometry is behind the camera
+            if (maxY <= 0)
+                return false;
+            minY = (_max.getY() - p0Y) / directionY;
+        } else if (directionY > 0) {
+            maxY = (_max.getY() - p0Y) / directionY;
+            if (maxX <= 0)
+                return false;
+            minY = (_min.getY() - p0Y) / directionY;
+        } else {
+            if (p0Y >= _max.getY() || p0Y <= _min.getY())
+                return false;
+            else {
+                maxY = Double.POSITIVE_INFINITY;
+                minY = Double.NEGATIVE_INFINITY;
+            }
         }
 
-        return t;
+        double tempMax = maxY < maxX ? maxY : maxX;
+        double tempMin = minY > minX ? minY : minX;
+        tempMin = tempMin > 0 ? tempMin : 0;
+        if (tempMax < tempMin)
+            return false;
+
+        double maxZ;
+        double minZ;
+
+//if the directionZ is negative, then the min Z in the box is maximal
+        if (directionZ < 0) {
+            maxZ = (_min.getZ() - p0Z) / directionZ;
+            //check if the geometry is behind the camera
+            if (maxZ <= 0)
+                return false;
+            minZ = (_max.getZ() - p0Z) / directionZ;
+        } else if (directionZ > 0) {
+            maxZ = (_max.getZ() - p0Z) / directionZ;
+            if (maxX <= 0)
+                return false;
+            minZ = (_min.getZ() - p0Z) / directionZ;
+        } else {
+            if (p0Z >= _max.getZ() || p0Z <= _min.getZ())
+                return false;
+            else {
+                maxZ = Double.POSITIVE_INFINITY;
+                minZ = Double.NEGATIVE_INFINITY;
+            }
+        }
+
+        tempMax = maxZ < tempMax ? maxZ : tempMax;
+        tempMin = minZ > tempMin ? minZ : tempMin;
+        if (tempMax < tempMin)
+            return false;
+
+        return true;
+
     }
+
 
 }

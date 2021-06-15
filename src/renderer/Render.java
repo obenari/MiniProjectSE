@@ -11,12 +11,21 @@ import java.util.MissingResourceException;
  * scene, using ImageWriter class
  *
  * @author Dan
- *
  */
 public class Render {
+    /**
+     * the scene camera
+     */
     private Camera camera;
+    /**
+     * the scene ImageWriter
+     */
     private ImageWriter imageWriter;
+    /**
+     * the scene RayTracer
+     */
     private RayTracerBase tracer;
+    //------------missing resources
     private static final String RESOURCE_ERROR = "Renderer resource not set";
     private static final String RENDER_CLASS = "Render";
     private static final String IMAGE_WRITER_COMPONENT = "Image writer";
@@ -64,7 +73,6 @@ public class Render {
      * thread.
      *
      * @author Dan
-     *
      */
     private class Pixel {
         private long maxRows = 0;
@@ -106,8 +114,8 @@ public class Render {
          * @param target target secondary Pixel object to copy the row/column of the
          *               next pixel
          * @return the progress percentage for follow up: if it is 0 - nothing to print,
-         *         if it is -1 - the task is finished, any other value - the progress
-         *         percentage (only when it changes)
+         * if it is -1 - the task is finished, any other value - the progress
+         * percentage (only when it changes)
          */
         private synchronized int nextP(Pixel target) {
             ++col;
@@ -222,12 +230,17 @@ public class Render {
 
     /**
      * Cast ray from camera in order to color a pixel
-     * @param nX resolution on X axis (number of pixels in row)
-     * @param nY resolution on Y axis (number of pixels in column)
+     *
+     * @param nX  resolution on X axis (number of pixels in row)
+     * @param nY  resolution on Y axis (number of pixels in column)
      * @param col pixel's column number (pixel index in row)
      * @param row pixel's row number (pixel index in column)
      */
     private void castRay(int nX, int nY, int col, int row) {
+        if (row == 20 && col == 200) {
+            System.out.println(row + "-" + col);
+        }
+        System.out.println(row + "-" + col);
         Ray ray = camera.constructRayThroughPixel(nX, nY, col, row);
         Color color = tracer.traceRay(ray);
         imageWriter.writePixel(col, row, color);
@@ -310,96 +323,3 @@ public class Render {
                     imageWriter.writePixel(j, i, color);
     }
 }
-
-//package renderer;
-//
-//import elements.Camera;
-//import primitives.Color;
-//import primitives.Point3D;
-//import primitives.Ray;
-//import scene.Scene;
-//
-//import java.util.List;
-//import java.util.MissingResourceException;
-//
-///**
-// * this class create the image's color matrix from the scene
-// */
-//public class Render {
-//    private ImageWriter _imageWriter;
-//    private Camera _camera;
-//    private RayTracerBase _rayTracer;
-//
-//    //chaining methods
-//    public Render setImageWriter(ImageWriter imageWriter) {
-//        _imageWriter = imageWriter;
-//        return this;
-//    }
-//
-//
-//    public Render setCamera(Camera camera) {
-//        _camera = camera;
-//        return this;
-//    }
-//
-//    public Render setRayTracer(RayTracerBase rayTracer) {
-//        _rayTracer = rayTracer;
-//        return this;
-//    }
-//
-//    /**
-//     * this function  calculate the color of each pixel, and color it
-//     */
-//    public void renderImage() {
-//        //check that all the field is not null
-//        if (_imageWriter == null || _camera == null || _rayTracer == null) {
-//            throw new MissingResourceException("one or more field in render is null", "render", "");
-//        }
-//        //calculate and paint all the pixels
-//        int nX = _imageWriter.getNx();
-//        int nY = _imageWriter.getNy();
-//        for (int i = 0; i < nY; i++) {
-//            for (int j = 0; j < nX; j++) {
-//                if(i==100&&j==100) {
-//                    System.out.println(i + "-" + j);
-//                }
-//                System.out.println(i + "-" + j);
-//                Ray ray = _camera.constructRayThroughPixel(nX, nY, j, i);
-//                Color color = _rayTracer.traceRay(ray);
-//                _imageWriter.writePixel(j, i, color);
-//            }
-//        }
-//    }
-//
-//    /**
-//     * print grid on the picture
-//     *
-//     * @param interval      distance between the lines grid
-//     * @param intervalColor the color of the grid
-//     */
-//    public void printGrid(int interval, Color intervalColor) {
-//        if (_imageWriter == null) {
-//            throw new MissingResourceException("_imageWriter is null", "render", "");
-//        }
-//        int nX = _imageWriter.getNx();
-//        int nY = _imageWriter.getNy();
-//        for (int i = 0; i < nY; i++) {
-//            for (int j = 0; j < nX; j++) {
-//                if (i % interval == 0 || j % interval == 0) {
-//                    _imageWriter.writePixel(j, i, intervalColor);
-//                }
-//            }
-//        }
-//
-//    }
-//
-//    /**
-//     * this methode implement the low of Demeter
-//     */
-//    public void writeToImage() {
-//        if (_imageWriter == null) {
-//            throw new MissingResourceException("_imageWriter is null", "render", "");
-//        }
-//        _imageWriter.writeToImage();
-//    }
-//}

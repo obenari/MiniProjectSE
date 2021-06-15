@@ -13,12 +13,21 @@ import java.util.List;
  * @author Odelia Ben Ari
  */
 public class Triangle extends Polygon {
-
+    /**
+     * constructor
+     *
+     * @param p1
+     * @param p2
+     * @param p3
+     */
     public Triangle(Point3D p1, Point3D p2, Point3D p3) {
         super(p1, p2, p3);
         initBox();
     }
 
+    /**
+     * calculate the box that bound the triangle
+     */
     @Override
     void initBox() {
         double xMax = -Double.POSITIVE_INFINITY;
@@ -27,7 +36,7 @@ public class Triangle extends Polygon {
         double xMin = Double.POSITIVE_INFINITY;
         double yMin = Double.POSITIVE_INFINITY;
         double zMin = Double.POSITIVE_INFINITY;
-        for (Point3D p : vertices) {
+        for (Point3D p : vertices) {//find the min and max x,y,z
             if (xMax < p.getX())
                 xMax = p.getX();
             if (yMax < p.getY())
@@ -42,7 +51,7 @@ public class Triangle extends Polygon {
                 zMin = p.getZ();
 
         }
-        _box=new AABB(new Point3D(xMin,yMin,zMin),new Point3D(xMax,yMax,zMax));
+        _box = new AABB(new Point3D(xMin, yMin, zMin), new Point3D(xMax, yMax, zMax));
     }
 
     @Override
@@ -52,6 +61,13 @@ public class Triangle extends Polygon {
                 '}';
     }
 
+    /**
+     * find the geoIntersections between the ray and the triangle that smaller then maxDistance
+     *
+     * @param ray
+     * @param maxDistance
+     * @return
+     */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         var intersection = plane.findGeoIntersections(ray, maxDistance);
@@ -72,6 +88,7 @@ public class Triangle extends Polygon {
         double t1 = N1.dotProduct(v);
         double t2 = N2.dotProduct(v);
         double t3 = N3.dotProduct(v);
+        //if t1, t2, t3 ha has the same sign, the intersection with the plane is in triangle
         if (t1 > 0 && t2 > 0 && t3 > 0 || t1 < 0 && t2 < 0 && t3 < 0)
             return List.of(new GeoPoint(this, intersection.get(0).point));
         return null;

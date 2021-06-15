@@ -15,18 +15,40 @@ import static primitives.Util.isZero;
  * @author Odelia Ben Ari
  */
 public class Tube extends Geometry {
+    /**
+     * the direction of the tube
+     */
     Ray _axisRay;
+    /**
+     * the radius of teh tube
+     */
     double _radius;
 
+    /**
+     * constructor
+     *
+     * @param axisRay
+     * @param radius
+     */
     public Tube(Ray axisRay, double radius) {
         _axisRay = axisRay;
         _radius = radius;
     }
 
+    /**
+     * getter
+     *
+     * @return
+     */
     public Ray getAxisRay() {
         return _axisRay;
     }
 
+    /**
+     * getter
+     *
+     * @return
+     */
     public double getRadius() {
         return _radius;
     }
@@ -39,6 +61,12 @@ public class Tube extends Geometry {
                 '}';
     }
 
+    /**
+     * clculate the normal to the point in the tube
+     *
+     * @param point
+     * @return
+     */
     @Override
     public Vector getNormal(Point3D point) {
         //  t=v∙(p−p0)
@@ -52,19 +80,21 @@ public class Tube extends Geometry {
         return point.subtract(p1).normalize();
     }
 
-
-    @Override
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
-        return null;
-    }
-
+    /**
+     * find the geoIntersections between the ray and the tube that smaller then maxDistance
+     *
+     * @param ray
+     * @return
+     */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         return null;
     }
 
+    /**
+     * calculate the box that bound the tube
+     */
     @Override
     void initBox() {
-
     }
 }

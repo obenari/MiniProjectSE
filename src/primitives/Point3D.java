@@ -1,18 +1,32 @@
 package primitives;
 
 /**
- *this class represent a point with 3 coordinate in 3D Cartesian coordinate
+ * this class represent a point with 3 coordinate in 3D Cartesian coordinate
  * system
+ *
  * @author Odelia Ben Ari
  */
 public class Point3D {
+    /**
+     * the x value of the point
+     */
     final Coordinate _x;
+    /**
+     * the y value of the point
+     */
     final Coordinate _y;
+    /**
+     * the x value of the point
+     */
     final Coordinate _z;
-
+    /**
+     * start of the axis
+     */
     public final static Point3D ZERO = new Point3D(0d, 0d, 0d);
 
     /**
+     * constructor
+     *
      * @param x value for creating X coordinate
      * @param y value for creating Y coordinate
      * @param z value for creating Z coordinate
@@ -53,6 +67,7 @@ public class Point3D {
 
     /**
      * this method calculate the point that received after adding the vector to thos point
+     *
      * @param vector the vector to add to this point
      * @return new point after adding the vector from this point
      */
@@ -63,12 +78,30 @@ public class Point3D {
 
         return new Point3D(x, y, z);
     }
+
+    /**
+     * getter
+     *
+     * @return
+     */
     public double getX() {
         return _x.coord;
     }
+
+    /**
+     * getter
+     *
+     * @return
+     */
     public double getY() {
         return _y.coord;
     }
+
+    /**
+     * getter
+     *
+     * @return
+     */
     public double getZ() {
         return _z.coord;
     }
@@ -88,6 +121,7 @@ public class Point3D {
 
     /**
      * this method return the distance squared from the request point to this point
+     *
      * @param point3D the point to calculate the distance from this point
      * @return the distance squared from the request point to this point
      */
@@ -100,6 +134,7 @@ public class Point3D {
 
     /**
      * this method return the distance  from the request point to this point
+     *
      * @param point3D the point to calculate the distance from this point
      * @return the distance  from the request point to this point
      */

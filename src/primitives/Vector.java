@@ -2,9 +2,11 @@ package primitives;
 
 import static primitives.Util.*;
 import static primitives.Point3D.ZERO;
+
 /**
- **this class represent a vector in 3D Cartesian coordinate
- *  * system
+ * *this class represent a vector in 3D Cartesian coordinate
+ * * system
+ *
  * @author Odelia Ben Ari and Talya Shmuelian
  */
 
@@ -16,6 +18,7 @@ public class Vector {
 
     /**
      * this constructor get the vector head
+     *
      * @param head the vector head
      */
     public Vector(Point3D head) {
@@ -26,6 +29,7 @@ public class Vector {
 
     /**
      * this constructor don't call to the prev constructor in order to make  good performance
+     *
      * @param x the value of x coordinate in the vector
      * @param y the value of y coordinate in the vector
      * @param z the value of z coordinate in the vector
@@ -40,6 +44,7 @@ public class Vector {
 
     /**
      * this constructor don"t call to the prev constructor in order to make  good performance
+     *
      * @param x the value of x coordinate
      * @param y the value of y coordinate
      * @param z the value of z coordinate
@@ -53,6 +58,7 @@ public class Vector {
 
     /**
      * get methode
+     *
      * @return _head
      */
     public Point3D getHead() {
@@ -61,6 +67,7 @@ public class Vector {
 
     /**
      * get methode
+     *
      * @return
      */
     public double getX() {
@@ -70,6 +77,7 @@ public class Vector {
 
     /**
      * get methode
+     *
      * @return
      */
     public double getY() {
@@ -79,6 +87,7 @@ public class Vector {
 
     /**
      * get methode
+     *
      * @return
      */
     public double getZ() {
@@ -88,6 +97,7 @@ public class Vector {
 
     /**
      * equal methode
+     *
      * @param o
      * @return
      */
@@ -101,11 +111,12 @@ public class Vector {
 
     @Override
     public String toString() {
-        return  _head.toString();
+        return _head.toString();
     }
 
     /**
      * this method return the value of Scleric product between the request vector and this vector
+     *
      * @param v the vector to product with this vector
      * @return
      */
@@ -118,6 +129,7 @@ public class Vector {
 
     /**
      * this method return a new vector that received  after subtract the request vector from this vector
+     *
      * @param other
      * @return
      */
@@ -132,17 +144,19 @@ public class Vector {
 
     /**
      * this method return the vector length squared
+     *
      * @return
      */
     public double lengthSquared() {
         //calculate x*x+y*y+z*z
-        return  _head._x.coord * _head._x.coord +
+        return _head._x.coord * _head._x.coord +
                 _head._y.coord * _head._y.coord +
                 _head._z.coord * _head._z.coord;
     }
 
     /**
      * this method return the vector length
+     *
      * @return
      */
     public double length() {
@@ -158,15 +172,16 @@ public class Vector {
         double len = this.length();
         if (isZero(len))
             throw new ArithmeticException("the length is o");
-        double x = _head._x.coord/len;
-        double y = _head._y.coord/len;
-        double z = _head._z.coord/len;
+        double x = _head._x.coord / len;
+        double y = _head._y.coord / len;
+        double z = _head._z.coord / len;
         _head = new Point3D(x, y, z);
         return this;
     }
 
     /**
      * return new vector in the same direction to this, but with length 1
+     *
      * @return this vector after change its length to 1
      */
     public Vector normalized() {
@@ -175,7 +190,8 @@ public class Vector {
     }
 
     /**
-     *this method return a new vector that vertical to this vector and the request vector
+     * this method return a new vector that vertical to this vector and the request vector
+     *
      * @param v
      * @return
      */
@@ -193,6 +209,7 @@ public class Vector {
 
     /**
      * return a new vector after scale this vector by the request number
+     *
      * @param a the value to multiply
      * @return new vector after scale this vector by the request number
      */

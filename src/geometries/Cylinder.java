@@ -5,15 +5,17 @@ import primitives.Ray;
 import primitives.Vector;
 
 /**
- *this class represent a finite cylinder in 3D Cartesian coordinate
+ * this class represent a finite cylinder in 3D Cartesian coordinate
  * system
- * @author Odelia Ben Ari
+ *
+ * @author
  */
-public class Cylinder  extends Tube{
+public class Cylinder extends Tube {
     double _height;
 
     /**
      * the constructor call to Tube constructor
+     *
      * @param axisRay
      * @param radius
      * @param height
@@ -23,6 +25,11 @@ public class Cylinder  extends Tube{
         _height = height;
     }
 
+    /**
+     * getter
+     *
+     * @return
+     */
     public double getHeight() {
         return _height;
     }
@@ -36,6 +43,12 @@ public class Cylinder  extends Tube{
                 '}';
     }
 
+    /**
+     * return the normal to the point in the cylinder
+     *
+     * @param point
+     * @return
+     */
     @Override
     public Vector getNormal(Point3D point) {
         return null;

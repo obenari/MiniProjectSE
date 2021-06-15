@@ -3,29 +3,26 @@ package elements;
 import primitives.Color;
 
 /**
- *
+ * class for ambient light
  */
-public class AmbientLight extends Light{
-
-
+public class AmbientLight extends Light {
 
     /**
      * default constructor with initialize with black
      */
     public AmbientLight() {
-        super( Color.BLACK);
+        super(Color.BLACK);
     }
 
     /**
-     *constructor
+     * constructor
+     *
      * @param Ia the basic color
      * @param Ka reduction coefficient
      */
     public AmbientLight(Color Ia, double Ka) {
         super(Ia.scale(Ka));
     }
-
-
 
 
 }

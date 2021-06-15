@@ -8,15 +8,17 @@ import primitives.Vector;
  * this class represent spot light
  * has attenuation according to the distance and direction
  */
-public class SpotLight extends PointLight{
+public class SpotLight extends PointLight {
 
     /**
      * the spot light direction
      */
     private final Vector _centerDirection;
+
     /**
      * constructor
-     *  @param intensity
+     *
+     * @param intensity
      * @param position
      * @param centerDirection
      */
@@ -26,14 +28,13 @@ public class SpotLight extends PointLight{
     }
 
     /**
-     *
      * @param point3D
      * @return the light intensity on the point
      */
     @Override
     public Color getIntensity(Point3D point3D) {
-        Vector l=getL(point3D);
-        Color intensity  =super.getIntensity(point3D);
+        Vector l = getL(point3D);
+        Color intensity = super.getIntensity(point3D);
         //calculate the attenuation according to the direction
         return intensity.scale(Math.max(0, l.dotProduct(_centerDirection)));
 

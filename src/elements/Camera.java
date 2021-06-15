@@ -6,15 +6,46 @@ import primitives.Vector;
 
 import static primitives.Util.isZero;
 
+/*
+the class for the position of the camera, and the directions and distance from the view plane
+ */
 public class Camera {
+    /**
+     * the position of the camera
+     */
     private final Point3D _p0;
+    /**
+     * the direction of the camera to view plane
+     */
     private final Vector _vTo;
+    /**
+     * the direction up of the camera that parallel to the view plane
+     */
     private final Vector _vUp;
+    /**
+     * the direction right of the camera that parallel to the view plane
+     */
     private final Vector _vRight;
+    /**
+     * the width view plane
+     */
     private double _width;
+    /**
+     * the height view plane
+     */
     private double _height;
+    /**
+     * the distance between the camera to the view plane
+     */
     private double _distance;
 
+    /**
+     * constructor
+     *
+     * @param p0  the position of the camera
+     * @param vTo the direction of the camera to view plane
+     * @param vUp the direction up of the camera that parallel to the view plane
+     */
     public Camera(Point3D p0, Vector vTo, Vector vUp) {
         _p0 = p0;
         //check if vUp and vTo are orthogonal
@@ -26,30 +57,65 @@ public class Camera {
         _vRight = _vTo.crossProduct(_vUp).normalize();
     }
 
+    /**
+     * getter methode
+     *
+     * @return
+     */
     public Point3D getP0() {
         return _p0;
     }
 
+    /**
+     * getter methode
+     *
+     * @return
+     */
     public Vector getvTo() {
         return _vTo;
     }
 
+    /**
+     * getter methode
+     *
+     * @return
+     */
     public Vector getvUp() {
         return _vUp;
     }
 
+    /**
+     * getter methode
+     *
+     * @return
+     */
     public Vector getvRight() {
         return _vRight;
     }
 
+    /**
+     * getter methode
+     *
+     * @return
+     */
     public double getWidth() {
         return _width;
     }
 
+    /**
+     * getter methode
+     *
+     * @return
+     */
     public double getHeight() {
         return _height;
     }
 
+    /**
+     * getter methode
+     *
+     * @return
+     */
     public double getDistance() {
         return _distance;
     }
@@ -72,7 +138,7 @@ public class Camera {
      * @return "this": camera current instance
      */
     public Camera setDistance(double distance) {
-        if(isZero(distance)){
+        if (isZero(distance)) {
             throw new IllegalArgumentException("distance cannot be zero");
         }
         _distance = distance;
@@ -96,7 +162,7 @@ public class Camera {
         Point3D Pij = Pc;
         double xj = (j - (nX - 1) / 2d) * Rx;//horizontal  distance from the center (ציר אופקי)
         double yi = -(i - (nY - 1) / 2d) * Ry;//vertical  distance from the center (ציר אנכי)
-      //in case that xj is zero, its no need to add xj to Pc
+        //in case that xj is zero, its no need to add xj to Pc
         if (!isZero(xj)) {
             Pij = Pij.add(_vRight.scale(xj));
         }

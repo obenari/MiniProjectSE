@@ -17,6 +17,7 @@ public class BasicRayTracer extends RayTracerBase {
 
     /**
      * initialize the field scene
+     *
      * @param scene
      */
     public BasicRayTracer(Scene scene) {
@@ -25,10 +26,11 @@ public class BasicRayTracer extends RayTracerBase {
 
     /**
      * this methode get ray, and calculate the color of the closest intersection
+     *
      * @param ray
      * @return the colour of the closest point
      */
-    public  Color traceRay(Ray ray) {
+    public Color traceRay(Ray ray) {
         GeoPoint closestPoint = findClosestIntersection(ray);
         if (closestPoint == null) return _scene.backGroundColor;
         return calcColor(closestPoint, ray);
@@ -36,6 +38,7 @@ public class BasicRayTracer extends RayTracerBase {
 
     /**
      * calculate the ambientLight of the point
+     *
      * @param geoPoint
      * @return the color of the point
      */
@@ -43,6 +46,7 @@ public class BasicRayTracer extends RayTracerBase {
         return calcColor(geoPoint, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K)
                 .add(_scene.ambientLight.getIntensity());
     }
+
     /**
      * calculate the color of the point according to local and global effects
      *
@@ -92,6 +96,7 @@ public class BasicRayTracer extends RayTracerBase {
         }
         return color;
     }
+
     /**
      * calculate the intensity of lightSource on point
      *
@@ -158,12 +163,14 @@ public class BasicRayTracer extends RayTracerBase {
     protected GeoPoint findClosestIntersection(Ray ray) {
         return ray.findClosestGeoPoint(_scene.geometries.findGeoIntersections(ray));
     }
+
     /**
      * calculate the color of point according to refraction and reflection
+     *
      * @param geoPoint
      * @param ray
-     * @param level depth of recursion
-     * @param k intensity of the refraction or reflection
+     * @param level    depth of recursion
+     * @param k        intensity of the refraction or reflection
      * @return
      */
     protected Color calcGlobalEffects(GeoPoint geoPoint, Ray ray, int level, double k) {
@@ -191,8 +198,10 @@ public class BasicRayTracer extends RayTracerBase {
         }
         return color;
     }
+
     /**
      * calculate the Refracted Ray to the point
+     *
      * @param geoPoint
      * @param ray
      * @return
@@ -204,6 +213,7 @@ public class BasicRayTracer extends RayTracerBase {
 
     /**
      * calculate the Reflected Ray to the point
+     *
      * @param geoPoint
      * @param ray
      * @return

@@ -1,7 +1,9 @@
 package geometries;
 
 import java.util.List;
+
 import primitives.*;
+
 import static primitives.Util.*;
 
 /**
@@ -81,18 +83,33 @@ public class Polygon extends Geometry {
         }
     }
 
+    /**
+     * normal to the point
+     *
+     * @param point
+     * @return
+     */
     @Override
     public Vector getNormal(Point3D point) {
         return plane.getNormal(null);
     }
 
+    /**
+     * find geo intersection between the polygon and the ray
+     *
+     * @param ray
+     * @param maxDistance
+     * @return
+     */
     @Override
-    public List<GeoPoint> findGeoIntersections(Ray ray,double maxDistance) {
+    public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         return null;
     }
 
+    /**
+     *
+     */
     @Override
     void initBox() {
-
     }
 }

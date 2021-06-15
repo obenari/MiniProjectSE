@@ -15,25 +15,43 @@ import static primitives.Util.alignZero;
  * @author Odelia Ben Ari
  */
 public class Sphere extends Geometry {
+    /**
+     * the radius of the sphere
+     */
     private final double _radius;
+    /**
+     * the center point of the sphere
+     */
     private final Point3D _center;
 
+    /**
+     * constructor
+     *
+     * @param radius
+     * @param center
+     */
     public Sphere(double radius, Point3D center) {
         _radius = radius;
         _center = center;
         initBox();
     }
 
+    /**
+     * initialize the box that bound the sphere
+     */
     @Override
     void initBox() {
-        double xMax = _center.getX() + _radius;
-        double yMax = _center.getY() + _radius;
-        double zMax = _center.getZ() + _radius;
-        double xMin = _center.getX() - _radius;
-        double yMin = _center.getY() - _radius;
-        double zMin = _center.getZ() - _radius;
+        Vector vector = new Vector(_radius, _radius, _radius);
+        Point3D max = _center.add(vector);
+        Point3D min = _center.add(vector.scale(-1));
+        _box = new AABB(min, max);
     }
 
+    /**
+     * getter
+     *
+     * @return
+     */
     public Point3D getCenter() {
         return _center;
     }
@@ -46,18 +64,31 @@ public class Sphere extends Geometry {
                 '}';
     }
 
+    /**
+     * calculate the normal to the required point on the sphere
+     *
+     * @param point
+     * @return
+     */
     @Override
     public Vector getNormal(Point3D point) {
 
         return point.subtract(_center).normalize();
     }
 
+    /**
+     * find the geoIntersections between the ray and the sphere that smaller then maxDistance
+     *
+     * @param ray
+     * @param maxDistance
+     * @return
+     */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         Point3D p0 = ray.getP0();
         Point3D O = _center;
         Vector V = ray.getDir();
-        if (p0.equals(O)) {
+        if (p0.equals(O)) {//if the ray start is in the center of the sphere
             return (List.of(new GeoPoint(this, ray.getPoint(_radius))));
         }
         Vector U = O.subtract(p0);
@@ -69,7 +100,7 @@ public class Sphere extends Geometry {
         double th = Math.sqrt(_radius * _radius - d * d);
         double t1 = alignZero(tm - th);
         double t2 = alignZero(tm + th);
-
+        //if t1 or t2 is negative, the intersection is before the ray start
         if (t1 > 0 && t2 > 0 && alignZero(t1 - maxDistance) <= 0 && alignZero(t2 - maxDistance) <= 0) {
             Point3D p1 = ray.getPoint(t1);
             Point3D p2 = ray.getPoint(t2);
