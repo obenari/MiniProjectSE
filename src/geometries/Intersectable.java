@@ -14,7 +14,7 @@ public abstract class Intersectable {
     /**
      * button to turn on/ off the improvement in run time
      */
-    static public boolean improvementIsOff = false;
+    static public boolean improvementBVHIsOff = false;
     /**
      * the box that bounded the Intersectable
      */

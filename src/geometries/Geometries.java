@@ -3,7 +3,6 @@ package geometries;
 import primitives.Point3D;
 import primitives.Ray;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,7 +59,7 @@ public class Geometries extends Intersectable {
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         List<GeoPoint> result = null;
         for (Intersectable geo : _listOfGeometries) {
-            if (improvementIsOff || geo._box.hit(ray)) {//if the ray don't hit the box,no need to find intersection points
+            if (improvementBVHIsOff || geo._box.hit(ray)) {//if the ray don't hit the box,no need to find intersection points
                 List<GeoPoint> geoPoints = geo.findGeoIntersections(ray, maxDistance);
                 if (geoPoints != null) {
                     if (result == null) {
@@ -105,7 +104,7 @@ public class Geometries extends Intersectable {
         Intersectable son2 = null;
         while (_listOfGeometries.size() > 1) {//
             double minDistance = Double.POSITIVE_INFINITY;
-            for (Intersectable geo1 : _listOfGeometries) {
+            Intersectable geo1 = _listOfGeometries.get(0);
                 for (Intersectable geo2 : _listOfGeometries) {
                     //find the minimum distance between 2 boxes
                     if (geo1 != geo2 && (distance = distance(geo1, geo2)) < minDistance) {
@@ -114,7 +113,7 @@ public class Geometries extends Intersectable {
                         son2 = geo2;
                     }
                 }
-            }
+
             Geometries tempGeometries = new Geometries(son1, son2);//union the two closest geometries
             _listOfGeometries.remove(son1);
             _listOfGeometries.remove(son2);
@@ -125,6 +124,10 @@ public class Geometries extends Intersectable {
         _listOfGeometries.addAll(planeList);//add the infinity geometries to the list
     }
 
+
+    /**
+     * create BVH tree from the geometries
+     */
     public void createBVHTree1() {
         List<Intersectable> planeList = new LinkedList<>();
         for (Intersectable geo : _listOfGeometries) {

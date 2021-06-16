@@ -237,9 +237,6 @@ public class Render {
      * @param row pixel's row number (pixel index in column)
      */
     private void castRay(int nX, int nY, int col, int row) {
-        if (row == 20 && col == 200) {
-            System.out.println(row + "-" + col);
-        }
         System.out.println(row + "-" + col);
         Ray ray = camera.constructRayThroughPixel(nX, nY, col, row);
         Color color = tracer.traceRay(ray);

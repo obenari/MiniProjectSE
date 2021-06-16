@@ -23,7 +23,6 @@ public class AABB {
      * the maximum point in the box
      */
     final Point3D _max;
-
     /**
      * constructor
      *
@@ -80,9 +79,9 @@ public class AABB {
     }
 
 
+
     /**
      * this function check if there is intersection between the box and the ray
-     *
      * @param ray
      * @return
      */
@@ -92,95 +91,70 @@ public class AABB {
         double p0Y = p0.getY();
         double p0Z = p0.getZ();
         Vector direction = ray.getDir();
-        double directionX = direction.getX();
-        double directionY = direction.getY();
-        double directionZ = direction.getZ();
+        double dirX = direction.getX();
+        double dirY = direction.getY();
+        double dirZ = direction.getZ();
 
-        double maxX;
-        double minX;
-//if the directionX is negative, then the min x in the box is maximal
-        if (directionX < 0) {
-            maxX = (_min.getX() - p0X) / directionX;
-            //check if the geometry is behind the camera
-            if (maxX <= 0)
-                return false;
-            minX = (_max.getX() - p0X) / directionX;
-        } else if (directionX > 0) {//
-            maxX = (_max.getX() - p0X) / directionX;
-            if (maxX <= 0)
-                return false;
-            minX = (_min.getX() - p0X) / directionX;
-        } else {
-            if (p0X >= _max.getX() || p0X <= _min.getX())
-                return false;
-            else {
-                maxX = Double.POSITIVE_INFINITY;
-                minX = Double.NEGATIVE_INFINITY;
-            }
+        double tmin ;
+        double tmax ;
+
+        if (dirX >= 0) {
+            tmin = (_min.getX() - p0X) /dirX;
+            tmax = (_max.getX() - p0X) / dirX;
+        }
+        else {//if the directionX is negative, then the min tx in the box is maximal
+            tmin = (_max.getX() -p0X) /dirX;
+            tmax = (_min.getX() - p0X) /dirX;
         }
 
-        double maxY;
-        double minY;
-
-//if the directionY is negative, then the min Y in the box is maximal
-        if (directionY < 0) {
-            maxY = (_min.getY() - p0Y) / directionY;
-            //check if the geometry is behind the camera
-            if (maxY <= 0)
-                return false;
-            minY = (_max.getY() - p0Y) / directionY;
-        } else if (directionY > 0) {
-            maxY = (_max.getY() - p0Y) / directionY;
-            if (maxX <= 0)
-                return false;
-            minY = (_min.getY() - p0Y) / directionY;
-        } else {
-            if (p0Y >= _max.getY() || p0Y <= _min.getY())
-                return false;
-            else {
-                maxY = Double.POSITIVE_INFINITY;
-                minY = Double.NEGATIVE_INFINITY;
-            }
+        double tymin ;
+        double tymax ;
+        if (dirY >= 0) {
+            tymin = (_min.getY() - p0Y) / dirY;
+            tymax = (_max.getY() - p0Y) / dirY;
         }
-
-        double tempMax = maxY < maxX ? maxY : maxX;
-        double tempMin = minY > minX ? minY : minX;
-        tempMin = tempMin > 0 ? tempMin : 0;
-        if (tempMax < tempMin)
+        else {//if the directionY is negative, then the min tY in the box is maximal
+            tymin = (_max.getY() - p0Y) / dirY;
+            tymax = (_min.getY() - p0Y) / dirY;
+        }
+        //        |         |
+        //miss!!  *t0x      |
+        //     *  |         |
+        //--*t1y--|---------|-------------
+        //        |         |
+        //        |         |
+        //--------|---------|---*t0y----------
+        //        |         | *   miss!!
+        //        |         *t1x
+        //        |         |
+        if ((tmin > tymax) || (tymin > tmax))
             return false;
 
-        double maxZ;
-        double minZ;
+        if (tymin > tmin)
+            tmin = tymin;
 
-//if the directionZ is negative, then the min Z in the box is maximal
-        if (directionZ < 0) {
-            maxZ = (_min.getZ() - p0Z) / directionZ;
-            //check if the geometry is behind the camera
-            if (maxZ <= 0)
-                return false;
-            minZ = (_max.getZ() - p0Z) / directionZ;
-        } else if (directionZ > 0) {
-            maxZ = (_max.getZ() - p0Z) / directionZ;
-            if (maxX <= 0)
-                return false;
-            minZ = (_min.getZ() - p0Z) / directionZ;
-        } else {
-            if (p0Z >= _max.getZ() || p0Z <= _min.getZ())
-                return false;
-            else {
-                maxZ = Double.POSITIVE_INFINITY;
-                minZ = Double.NEGATIVE_INFINITY;
-            }
+        if (tymax < tmax)
+            tmax = tymax;
+
+        double tzmin ;
+        double tzmax ;
+
+        if (dirZ >= 0) {
+            tzmin = (_min.getZ() - p0Z) / dirZ;
+            tzmax = (_max.getZ() - p0Z) / dirZ;
+        }
+        else {//if the directionZ is negative, then the min tZ in the box is maximal
+            tzmin = (_max.getZ()- p0Z) /dirZ;
+            tzmax = (_min.getZ() - p0Z) / dirZ;
         }
 
-        tempMax = maxZ < tempMax ? maxZ : tempMax;
-        tempMin = minZ > tempMin ? minZ : tempMin;
-        if (tempMax < tempMin)
+        if ((tmin > tzmax) || (tzmin > tmax))
             return false;
+
 
         return true;
-
     }
+
 
 
 }
