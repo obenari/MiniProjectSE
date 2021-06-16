@@ -12,7 +12,7 @@ import static primitives.Util.isZero;
  * this class represent a tube in 3D Cartesian coordinate
  * system
  *
- * @author Odelia Ben Ari
+ * @author
  */
 public class Tube extends Geometry {
     /**
@@ -38,7 +38,7 @@ public class Tube extends Geometry {
     /**
      * getter
      *
-     * @return
+     * @return the axisRay
      */
     public Ray getAxisRay() {
         return _axisRay;
@@ -47,7 +47,7 @@ public class Tube extends Geometry {
     /**
      * getter
      *
-     * @return
+     * @return radius
      */
     public double getRadius() {
         return _radius;
@@ -62,10 +62,10 @@ public class Tube extends Geometry {
     }
 
     /**
-     * clculate the normal to the point in the tube
+     * calculate the normal to the point in the tube
      *
-     * @param point
-     * @return
+     * @param point the point on the sphere and on the normal
+     * @return the normal
      */
     @Override
     public Vector getNormal(Point3D point) {
@@ -83,8 +83,8 @@ public class Tube extends Geometry {
     /**
      * find the geoIntersections between the ray and the tube that smaller then maxDistance
      *
-     * @param ray
-     * @return
+     * @param ray the ray
+     * @return the list of geoPoint intersection
      */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {

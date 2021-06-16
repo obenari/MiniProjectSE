@@ -29,7 +29,7 @@ public class PointLight extends Light implements LightSource {
     /**
      * constructor
      *
-     * @param intensity
+     * @param intensity the light color
      * @param position
      */
     public PointLight(Color intensity, Point3D position) {
@@ -41,7 +41,8 @@ public class PointLight extends Light implements LightSource {
     /**
      * chaining methods
      *
-     * @param kc
+     * @param kc const factor
+     * @return pointLight
      */
     public PointLight setKc(double kc) {
         _kc = kc;
@@ -51,8 +52,8 @@ public class PointLight extends Light implements LightSource {
     /**
      * chaining methods
      *
-     * @param kl
-     * @return
+     * @param kl linear factor
+     * @return pointLight
      */
     public PointLight setKl(double kl) {
         _kl = kl;
@@ -62,8 +63,8 @@ public class PointLight extends Light implements LightSource {
     /**
      * chaining methods
      *
-     * @param kq
-     * @return
+     * @param kq qube
+     * @return pointLight
      */
     public PointLight setKq(double kq) {
         _kq = kq;
@@ -73,7 +74,7 @@ public class PointLight extends Light implements LightSource {
     /**
      * getter
      *
-     * @return kc
+     * @return kc  const factor
      */
     public double getKc() {
         return _kc;
@@ -82,7 +83,7 @@ public class PointLight extends Light implements LightSource {
     /**
      * getter
      *
-     * @return kl
+     * @return kl linear factor
      */
     public double getKl() {
         return _kl;
@@ -91,7 +92,7 @@ public class PointLight extends Light implements LightSource {
     /**
      * getter
      *
-     * @return kq
+     * @return kq qube factor
      */
     public double getKq() {
         return _kq;
@@ -135,7 +136,7 @@ public class PointLight extends Light implements LightSource {
      * calculate the distance between the light source and the required point
      *
      * @param point
-     * @return
+     * @return distance
      */
     @Override
     public double getDistance(Point3D point) {

@@ -28,7 +28,7 @@ public class Cylinder extends Tube {
     /**
      * getter
      *
-     * @return
+     * @return height
      */
     public double getHeight() {
         return _height;
@@ -47,7 +47,6 @@ public class Cylinder extends Tube {
      * return the normal to the point in the cylinder
      *
      * @param point
-     * @return
      */
     @Override
     public Vector getNormal(Point3D point) {

@@ -33,7 +33,7 @@ public class ImproveSoftShadowRayTracer extends BasicRayTracer {
     /**
      * constructor
      *
-     * @param scene
+     * @param scene the scene
      */
     public ImproveSoftShadowRayTracer(Scene scene) {
         super(scene);
@@ -43,7 +43,7 @@ public class ImproveSoftShadowRayTracer extends BasicRayTracer {
      * chaining methode
      *
      * @param RADIUS
-     * @return
+     * @return ImproveSoftShadowRayTracer
      */
     public ImproveSoftShadowRayTracer setRADIUS(double RADIUS) {
         this.RADIUS = RADIUS;
@@ -53,15 +53,23 @@ public class ImproveSoftShadowRayTracer extends BasicRayTracer {
     /**
      * chaining methode
      *
-     * @param AMOUNT_OF_RAYS
-     * @return
+     * @param AMOUNT_OF_RAYS amount of rays
+     * @return ImproveSoftShadowRayTracer
      */
     public ImproveSoftShadowRayTracer setAMOUNT_OF_RAYS(double AMOUNT_OF_RAYS) {
         this.AMOUNT_OF_RAYS = AMOUNT_OF_RAYS;
         return this;
     }
 
-
+    /**
+     * this function calculate the average transparency of beam of shadow rays
+     *
+     * @param lightSource the light Source
+     * @param lightDirection vector from the light to the point
+     * @param n normal of the point
+     * @param geoPoint the geoPoint
+     * @return the average transparency of beam of shadow rays
+     */
     @Override
     protected double transparency(LightSource lightSource, Vector lightDirection, Vector n, GeoPoint geoPoint) {
         //if lightSource is DirectionalLight' there is no soft shadow

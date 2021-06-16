@@ -17,15 +17,15 @@ public interface LightSource {
 
     /**
      *
-     * @param point
+     * @param point the required point
      * @return Vector from the light source to the point
      */
     public Vector getL(Point3D point);
 
     /**
      * calculate the distance between the light source and the required point
-     * @param point
-     * @return
+     * @param point   required point
+     * @return the distance
      */
     double getDistance(Point3D point);
 }

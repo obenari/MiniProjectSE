@@ -60,7 +60,7 @@ public class Camera {
     /**
      * getter methode
      *
-     * @return
+     * @return position
      */
     public Point3D getP0() {
         return _p0;
@@ -69,7 +69,7 @@ public class Camera {
     /**
      * getter methode
      *
-     * @return
+     * @return vTo
      */
     public Vector getvTo() {
         return _vTo;
@@ -78,7 +78,7 @@ public class Camera {
     /**
      * getter methode
      *
-     * @return
+     * @return vUp
      */
     public Vector getvUp() {
         return _vUp;
@@ -87,7 +87,7 @@ public class Camera {
     /**
      * getter methode
      *
-     * @return
+     * @return vRight
      */
     public Vector getvRight() {
         return _vRight;
@@ -96,7 +96,7 @@ public class Camera {
     /**
      * getter methode
      *
-     * @return
+     * @return width
      */
     public double getWidth() {
         return _width;
@@ -105,7 +105,7 @@ public class Camera {
     /**
      * getter methode
      *
-     * @return
+     * @return height
      */
     public double getHeight() {
         return _height;
@@ -114,7 +114,7 @@ public class Camera {
     /**
      * getter methode
      *
-     * @return
+     * @return distance
      */
     public double getDistance() {
         return _distance;

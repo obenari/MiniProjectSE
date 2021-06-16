@@ -14,7 +14,7 @@ abstract class Light {
     /**
      * constructor
      *
-     * @param intensity
+     * @param intensity the light intensity
      */
     public Light(Color intensity) {
         _intensity = intensity;
@@ -23,7 +23,7 @@ abstract class Light {
     /**
      * getter
      *
-     * @return
+     * @return the light intensity
      */
     public Color getIntensity() {
         return _intensity;

@@ -50,11 +50,11 @@ public class BasicRayTracer extends RayTracerBase {
     /**
      * calculate the color of the point according to local and global effects
      *
-     * @param geoPoint
-     * @param ray
-     * @param level
-     * @param k
-     * @return
+     * @param geoPoint the geoPoint
+     * @param ray the ray
+     * @param level depth of the recursion
+     * @param k Initial color intensity
+     * @return the color
      */
     protected Color calcColor(GeoPoint geoPoint, Ray ray, int level, double k) {
         Color color = geoPoint.geometry.getEmission();
@@ -66,10 +66,10 @@ public class BasicRayTracer extends RayTracerBase {
     /**
      * calculate the color of point according to diffusion, specular and shininess
      *
-     * @param geoPoint
-     * @param ray
-     * @param k
-     * @return
+     * @param geoPoint the geoPoint
+     * @param ray the ray
+     * @param k Initial color intensity
+     * @return the color
      */
     protected Color calcLocalEffects(GeoPoint geoPoint, Ray ray, double k) {
         Vector v = ray.getDir();
@@ -100,10 +100,10 @@ public class BasicRayTracer extends RayTracerBase {
     /**
      * calculate the intensity of lightSource on point
      *
-     * @param lightSource
-     * @param l           light direction
-     * @param n           normal of the point
-     * @param geoPoint
+     * @param lightSource the light Source
+     * @param l  light direction
+     * @param n normal of the point
+     * @param geoPoint the geoPoint
      * @return the intensity of lightSource on point
      */
     protected double transparency(LightSource lightSource, Vector l, Vector n, GeoPoint geoPoint) {
@@ -204,7 +204,7 @@ public class BasicRayTracer extends RayTracerBase {
      *
      * @param geoPoint
      * @param ray
-     * @return
+     * @return the Refracted Ray to the point
      */
     protected Ray constructRefractedRay(GeoPoint geoPoint, Ray ray) {
         Vector n = geoPoint.geometry.getNormal(geoPoint.point);
@@ -216,7 +216,7 @@ public class BasicRayTracer extends RayTracerBase {
      *
      * @param geoPoint
      * @param ray
-     * @return
+     * @return the Reflected Ray to the point
      */
     protected Ray constructReflectedRay(GeoPoint geoPoint, Ray ray) {
         Vector n = geoPoint.geometry.getNormal(geoPoint.point);

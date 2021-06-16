@@ -10,7 +10,7 @@ import java.util.List;
  * this class represent a tringle in 3D Cartesian coordinate
  * system
  *
- * @author Odelia Ben Ari
+ * @author
  */
 public class Triangle extends Polygon {
     /**
@@ -30,6 +30,7 @@ public class Triangle extends Polygon {
      */
     @Override
     void initBox() {
+        //choosing the min and max could be calculate with stream.max, but it is don't improve the run time
         double xMax = -Double.POSITIVE_INFINITY;
         double yMax = -Double.POSITIVE_INFINITY;
         double zMax = -Double.POSITIVE_INFINITY;
@@ -37,20 +38,13 @@ public class Triangle extends Polygon {
         double yMin = Double.POSITIVE_INFINITY;
         double zMin = Double.POSITIVE_INFINITY;
         for (Point3D p : vertices) {//find the min and max x,y,z
-            if (xMax < p.getX())
-                xMax = p.getX();
-            if (yMax < p.getY())
-                yMax = p.getY();
-            if (zMax < p.getZ())
-                zMax = p.getZ();
+          xMax=xMax< p.getX() ?p .getX():xMax;
+          yMax=yMax< p.getY() ?p .getY():yMax;
+         zMax=zMax< p.getZ() ?p .getZ():zMax;
 
-            if (xMin > p.getX())
-                xMin = p.getX();
-            if (yMin > p.getY())
-                yMin = p.getY();
-            if (zMin > p.getZ())
-                zMin = p.getZ();
-
+         xMin=xMin > p.getX()?p .getX():xMin;
+         yMin=yMin > p.getY()?p .getY():yMin;
+         zMin=zMin > p.getZ()?p .getZ():zMin;
         }
         _box = new AABB(new Point3D(xMin, yMin, zMin), new Point3D(xMax, yMax, zMax));
     }
@@ -67,7 +61,7 @@ public class Triangle extends Polygon {
      *
      * @param ray
      * @param maxDistance
-     * @return
+     * @return the list of geoPoint intersection
      */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {

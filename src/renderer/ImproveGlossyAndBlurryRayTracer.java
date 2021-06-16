@@ -33,7 +33,6 @@ public class ImproveGlossyAndBlurryRayTracer extends BasicRayTracer {
      * @param scene
      */
     public ImproveGlossyAndBlurryRayTracer(Scene scene) {
-
         super(scene);
     }
 
@@ -41,7 +40,7 @@ public class ImproveGlossyAndBlurryRayTracer extends BasicRayTracer {
      * chaining methode
      *
      * @param RADIUS
-     * @return
+     * @return ImproveGlossyAndBlurryRayTracer
      */
     public ImproveGlossyAndBlurryRayTracer setRADIUS(double RADIUS) {
         this.RADIUS = RADIUS;
@@ -52,7 +51,7 @@ public class ImproveGlossyAndBlurryRayTracer extends BasicRayTracer {
      * chaining methode
      *
      * @param DISTANCE
-     * @return
+     * @return ImproveGlossyAndBlurryRayTracer
      */
     public ImproveGlossyAndBlurryRayTracer setDISTANCE(double DISTANCE) {
         this.DISTANCE = DISTANCE;
@@ -62,8 +61,8 @@ public class ImproveGlossyAndBlurryRayTracer extends BasicRayTracer {
     /**
      * chaining methode
      *
-     * @param AMOUNT_OF_RAYS
-     * @return
+     * @param AMOUNT_OF_RAYS amount of rays
+     * @return ImproveGlossyAndBlurryRayTracer
      */
     public ImproveGlossyAndBlurryRayTracer setAMOUNT_OF_RAYS(double AMOUNT_OF_RAYS) {
         this.AMOUNT_OF_RAYS = AMOUNT_OF_RAYS;
@@ -74,11 +73,11 @@ public class ImproveGlossyAndBlurryRayTracer extends BasicRayTracer {
     /**
      * calculate the color of point according to refraction and reflection
      *
-     * @param geoPoint
-     * @param ray
+     * @param geoPoint the geoPoint
+     * @param ray the ray
      * @param level    depth of recursion
      * @param k        intensity of the refraction or reflection
-     * @return
+     * @return the color
      */
     @Override
     protected Color calcGlobalEffects(GeoPoint geoPoint, Ray ray, int level, double k) {
@@ -128,9 +127,9 @@ public class ImproveGlossyAndBlurryRayTracer extends BasicRayTracer {
     /**
      * calculate beam of Refracted Rays to the point
      *
-     * @param geoPoint
-     * @param ray
-     * @return
+     * @param geoPoint the point through her cast refracted ray
+     * @param ray the ray that has intersection with the geoPoint
+     * @return the list of the refracted rays
      */
     private List<Ray> constructRefractedRays(GeoPoint geoPoint, Ray ray) {
         //we don't call to constructRefractedRay in rayTracerBase to save run time
@@ -171,9 +170,9 @@ public class ImproveGlossyAndBlurryRayTracer extends BasicRayTracer {
     /**
      * calculate beam of Reflected Rays to the point
      *
-     * @param geoPoint
-     * @param ray
-     * @return
+     * @param geoPoint the point through her cast reflected ray
+     * @param ray the ray that has intersection with the geoPoint
+     * @return the list of the reflected rays
      */
     private List<Ray> constructReflectedRays(GeoPoint geoPoint, Ray ray) {
         //we don't call to constructReflectedRay in rayTracerBase to save run time

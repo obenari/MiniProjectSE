@@ -25,6 +25,7 @@ public class AABB {
      * the maximum point in the box
      */
     final Point3D _max;
+
     /**
      * constructor
      *
@@ -40,7 +41,7 @@ public class AABB {
      * calculate the min and max point to the new box that contain the boxes,and create the box
      *
      * @param boxes
-     * @return
+     * @return the union box
      */
     static AABB Union(List<AABB> boxes) {
         if (boxes.size() == 0) {
@@ -55,76 +56,46 @@ public class AABB {
         double zMax = Double.NEGATIVE_INFINITY;
 
 
-        List<Double> kuku = new LinkedList<>();
-        kuku.add(12.3);
-        kuku.add(14.5);
-        kuku.add(78.9);
-        kuku.add(34.5);
-        kuku.add(5.2);
-
-
-
-        xMax= boxes.stream()
+        xMax = boxes.stream()
                 .mapToDouble(e -> e._max.getX())
                 .max()
                 .orElse(-1);
-       xMin= boxes.stream()
+        xMin = boxes.stream()
                 .mapToDouble(e -> e._min.getX())
                 .min()
                 .orElse(-1);
 
-       yMax= boxes.stream()
+        yMax = boxes.stream()
                 .mapToDouble(e -> e._max.getY())
                 .max()
                 .orElse(-1);
 
-       yMin= boxes.stream()
+        yMin = boxes.stream()
                 .mapToDouble(e -> e._min.getY())
                 .min()
                 .orElse(-1);
-       zMax= boxes.stream()
+        zMax = boxes.stream()
                 .mapToDouble(e -> e._max.getZ())
                 .max()
                 .orElse(-1);
 
-       zMin= boxes.stream()
+        zMin = boxes.stream()
                 .mapToDouble(e -> e._min.getZ())
                 .min()
                 .orElse(-1);
 
-//        //Iterate over points and find the biggest and smallest points
-//        for (AABB b : boxes) {
-//            if (b._min.getX() < xMin) {
-//                xMin = b._min.getX();
-//            }
-//            if (b._min.getY() < yMin) {
-//                yMin = b._min.getY();
-//            }
-//            if (b._min.getZ() < zMin) {
-//                zMin = b._min.getZ();
-//            }
-//
-//            if (b._max.getX() > xMax) {
-//                xMax = b._max.getX();
-//            }
-//            if (b._max.getY() > yMax) {
-//                yMax = b._max.getY();
-//            }
-//            if (b._max.getZ() > zMax) {
-//                zMax = b._max.getZ();
-//            }
-//
-//        }
         return new AABB(new Point3D(xMin, yMin, zMin), new Point3D(xMax, yMax, zMax));
 
     }
 
 
-
     /**
+     * https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection
      * this function check if there is intersection between the box and the ray
+     * credit for Amy Williams
+     *
      * @param ray
-     * @return
+     * @return if the ray has intersection with the box
      */
     public boolean hit(Ray ray) {
         Point3D p0 = ray.getP0();
@@ -136,25 +107,23 @@ public class AABB {
         double dirY = direction.getY();
         double dirZ = direction.getZ();
 
-        double tmin ;
-        double tmax ;
+        double tmin;
+        double tmax;
 
         if (dirX >= 0) {
-            tmin = (_min.getX() - p0X) /dirX;
+            tmin = (_min.getX() - p0X) / dirX;
             tmax = (_max.getX() - p0X) / dirX;
-        }
-        else {//if the directionX is negative, then the min tx in the box is maximal
-            tmin = (_max.getX() -p0X) /dirX;
-            tmax = (_min.getX() - p0X) /dirX;
+        } else {//if the directionX is negative, then the min tx in the box is maximal
+            tmin = (_max.getX() - p0X) / dirX;
+            tmax = (_min.getX() - p0X) / dirX;
         }
 
-        double tymin ;
-        double tymax ;
+        double tymin;
+        double tymax;
         if (dirY >= 0) {
             tymin = (_min.getY() - p0Y) / dirY;
             tymax = (_max.getY() - p0Y) / dirY;
-        }
-        else {//if the directionY is negative, then the min tY in the box is maximal
+        } else {//if the directionY is negative, then the min tY in the box is maximal
             tymin = (_max.getY() - p0Y) / dirY;
             tymax = (_min.getY() - p0Y) / dirY;
         }
@@ -177,15 +146,14 @@ public class AABB {
         if (tymax < tmax)
             tmax = tymax;
 
-        double tzmin ;
-        double tzmax ;
+        double tzmin;
+        double tzmax;
 
         if (dirZ >= 0) {
             tzmin = (_min.getZ() - p0Z) / dirZ;
             tzmax = (_max.getZ() - p0Z) / dirZ;
-        }
-        else {//if the directionZ is negative, then the min tZ in the box is maximal
-            tzmin = (_max.getZ()- p0Z) /dirZ;
+        } else {//if the directionZ is negative, then the min tZ in the box is maximal
+            tzmin = (_max.getZ() - p0Z) / dirZ;
             tzmax = (_min.getZ() - p0Z) / dirZ;
         }
 
@@ -195,7 +163,6 @@ public class AABB {
 
         return true;
     }
-
 
 
 }

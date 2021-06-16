@@ -14,7 +14,7 @@ import static primitives.Util.alignZero;
  * this class represent a plane in 3D Cartesian coordinate
  * system
  *
- * @author Odelia Ben Ari
+ * @author
  */
 public class Plane extends Geometry {
     /**
@@ -41,9 +41,9 @@ public class Plane extends Geometry {
     /**
      * constructor that get 3 points on the plane
      *
-     * @param p1
-     * @param p2
-     * @param p3
+     * @param p1 first point
+     * @param p2 second point
+     * @param p3 third point
      */
     public Plane(Point3D p1, Point3D p2, Point3D p3) {
         Vector v;
@@ -73,8 +73,8 @@ public class Plane extends Geometry {
     /**
      * getter
      *
-     * @param point
-     * @return
+     * @param point the point on the plane and on the normal
+     * @return the normal
      */
     @Override
     public Vector getNormal(Point3D point) {
@@ -101,8 +101,8 @@ public class Plane extends Geometry {
     /**
      * return list of GeoIntersections with one or more geometries
      *
-     * @param ray
-     * @return
+     * @param ray the ray
+     * @return the list of the gepPoint intersection
      */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {

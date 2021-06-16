@@ -68,7 +68,7 @@ public class Vector {
     /**
      * get methode
      *
-     * @return
+     * @return the value x of the head
      */
     public double getX() {
 
@@ -78,7 +78,7 @@ public class Vector {
     /**
      * get methode
      *
-     * @return
+     * @return the value y of the head
      */
     public double getY() {
 
@@ -88,7 +88,7 @@ public class Vector {
     /**
      * get methode
      *
-     * @return
+     * @return the value z of the head
      */
     public double getZ() {
 
@@ -118,7 +118,7 @@ public class Vector {
      * this method return the value of Scleric product between the request vector and this vector
      *
      * @param v the vector to product with this vector
-     * @return
+     * @return the value of Scleric product between the request vector and this vector
      */
     public double dotProduct(Vector v) {
         //the calculate is x1*x2+y1*y2+z1*z2
@@ -131,7 +131,7 @@ public class Vector {
      * this method return a new vector that received  after subtract the request vector from this vector
      *
      * @param other
-     * @return
+     * @return a new vector that received  after subtract the request vector from this vector
      */
     public Vector subtract(Vector other) {
         if (other.equals(this))
@@ -145,7 +145,7 @@ public class Vector {
     /**
      * this method return the vector length squared
      *
-     * @return
+     * @return the vector length squared
      */
     public double lengthSquared() {
         //calculate x*x+y*y+z*z
@@ -157,7 +157,7 @@ public class Vector {
     /**
      * this method return the vector length
      *
-     * @return
+     * @return the vector length
      */
     public double length() {
         return Math.sqrt(this.lengthSquared());
@@ -193,7 +193,7 @@ public class Vector {
      * this method return a new vector that vertical to this vector and the request vector
      *
      * @param v
-     * @return
+     * @return a new vector that vertical to this vector and the request vector
      */
     public Vector crossProduct(Vector v) {
         //UxV= (Uy*Vz-Vy*Uz,-Ux*Vz+Vx*Uz,Ux*Vy-Vx*Uy)

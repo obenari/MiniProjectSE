@@ -38,7 +38,7 @@ public class Scene {
     /**
      * initialize all the field to default values except the name
      *
-     * @param name
+     * @param name the scene name
      */
     public Scene(String name) {
         _name = name;
@@ -50,8 +50,8 @@ public class Scene {
     /**
      * setters for chaining methode
      *
-     * @param ambientLight
-     * @return
+     * @param ambientLight  Environmental lighting
+     * @return  Scene
      */
     public Scene setAmbientLight(AmbientLight ambientLight) {
         this.ambientLight = ambientLight;
@@ -61,8 +61,8 @@ public class Scene {
     /**
      * setters for chaining methode
      *
-     * @param color
-     * @return
+     * @param color the background color
+     * @return Scene
      */
     public Scene setBackground(Color color) {
         this.backGroundColor = color;

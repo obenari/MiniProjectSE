@@ -27,7 +27,7 @@ public class DirectionalLight extends Light implements LightSource {
     /**
      * return the light intensity
      *
-     * @return
+     * @return the light color
      */
     @Override
     public Color getIntensity(Point3D point) {
@@ -37,7 +37,7 @@ public class DirectionalLight extends Light implements LightSource {
     /**
      * return the vector from thr light to the required point
      *
-     * @return
+     * @return the vector from thr light to the required point
      */
     @Override
     public Vector getL(Point3D point) {
@@ -48,7 +48,7 @@ public class DirectionalLight extends Light implements LightSource {
      * the distance between the light and the point
      *
      * @param point
-     * @return
+     * @return  distance between the light and the point
      */
     @Override
     public double getDistance(Point3D point) {

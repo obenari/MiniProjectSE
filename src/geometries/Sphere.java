@@ -12,7 +12,7 @@ import static primitives.Util.alignZero;
  * this class represent a sphere in 3D Cartesian coordinate
  * system
  *
- * @author Odelia Ben Ari
+ * @author
  */
 public class Sphere extends Geometry {
     /**
@@ -27,8 +27,8 @@ public class Sphere extends Geometry {
     /**
      * constructor
      *
-     * @param radius
-     * @param center
+     * @param radius radius
+     * @param center center
      */
     public Sphere(double radius, Point3D center) {
         _radius = radius;
@@ -50,7 +50,7 @@ public class Sphere extends Geometry {
     /**
      * getter
      *
-     * @return
+     * @return center
      */
     public Point3D getCenter() {
         return _center;
@@ -67,8 +67,8 @@ public class Sphere extends Geometry {
     /**
      * calculate the normal to the required point on the sphere
      *
-     * @param point
-     * @return
+     * @param point the point on the sphere and on the normal
+     * @return the normal to the point
      */
     @Override
     public Vector getNormal(Point3D point) {
@@ -79,9 +79,9 @@ public class Sphere extends Geometry {
     /**
      * find the geoIntersections between the ray and the sphere that smaller then maxDistance
      *
-     * @param ray
-     * @param maxDistance
-     * @return
+     * @param ray ray
+     * @param maxDistance the maximum distance
+     * @return list of geoPoint intersection
      */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {

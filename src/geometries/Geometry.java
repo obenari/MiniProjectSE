@@ -58,7 +58,6 @@ public abstract class Geometry extends Intersectable {
      * return the normal to the required point in the geometry
      *
      * @param point
-     * @return
      */
     public abstract Vector getNormal(Point3D point);
 

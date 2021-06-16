@@ -46,14 +46,13 @@ public abstract class Intersectable {
             GeoPoint geoPoint = (GeoPoint) o;
             return geometry.equals(geoPoint.geometry) && point.equals(geoPoint.point);
         }
-
     }
 
     /**
      * return list of Intersections with one or more geometries
      *
      * @param ray
-     * @return
+     * @return the list of intersections
      */
     public List<Point3D> findIntersections(Ray ray) {
         List<GeoPoint> geoList = findGeoIntersections(ray);
@@ -67,7 +66,7 @@ public abstract class Intersectable {
      * return list of GeoIntersections with one or more geometries
      *
      * @param ray
-     * @return
+     * @return the list of geoPoint intersections
      */
     public List<GeoPoint> findGeoIntersections(Ray ray) {
         return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
@@ -79,7 +78,7 @@ public abstract class Intersectable {
      *
      * @param ray
      * @param maxDistance
-     * @return
+     * @return the list of geoPoint intersections that smallest from distance
      */
     abstract List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance);
 

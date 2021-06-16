@@ -29,7 +29,7 @@ public class Material {
      * setter chaining methode
      *
      * @param kR
-     * @return
+     * @return material
      */
     public Material setkR(double kR) {
         this.kR = kR;
@@ -40,7 +40,7 @@ public class Material {
      * setter chaining methode
      *
      * @param kT
-     * @return
+     * @return material
      */
     public Material setkT(double kT) {
         this.kT = kT;
@@ -51,7 +51,7 @@ public class Material {
      * setter chaining methode
      *
      * @param kD
-     * @return
+     * @return material
      */
     public Material setkD(double kD) {
         this.kD = kD;
@@ -62,7 +62,7 @@ public class Material {
      * setter chaining methode
      *
      * @param kS
-     * @return
+     * @return material
      */
     public Material setkS(double kS) {
         this.kS = kS;
@@ -73,7 +73,7 @@ public class Material {
      * setter chaining methode
      *
      * @param nShininess
-     * @return
+     * @return material
      */
     public Material setnShininess(int nShininess) {
         this.nShininess = nShininess;

@@ -35,7 +35,7 @@ public abstract class RayTracerBase {
     /**
      * constructor
      *
-     * @param scene
+     * @param scene the scene
      */
     public RayTracerBase(Scene scene) {
         _scene = scene;
@@ -44,8 +44,8 @@ public abstract class RayTracerBase {
     /**
      * this methode get ray, and calculate the color of the closest intersection
      *
-     * @param ray
-     * @return the colour of the closest point
+     * @param ray the ray from the camera to the specific pixel
+     * @return the color of the closest point
      */
     public abstract Color traceRay(Ray ray);
 

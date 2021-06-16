@@ -4,7 +4,7 @@ package primitives;
  * this class represent a point with 3 coordinate in 3D Cartesian coordinate
  * system
  *
- * @author Odelia Ben Ari
+ * @author
  */
 public class Point3D {
     /**
@@ -82,7 +82,7 @@ public class Point3D {
     /**
      * getter
      *
-     * @return
+     * @return the value of x
      */
     public double getX() {
         return _x.coord;
@@ -91,7 +91,7 @@ public class Point3D {
     /**
      * getter
      *
-     * @return
+     * @return the value of y
      */
     public double getY() {
         return _y.coord;
@@ -100,7 +100,7 @@ public class Point3D {
     /**
      * getter
      *
-     * @return
+     * @return the value of z
      */
     public double getZ() {
         return _z.coord;

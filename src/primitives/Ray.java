@@ -10,7 +10,7 @@ import java.util.Objects;
  * this class represent a ray in 3D Cartesian coordinate
  * system
  *
- * @author Odelia Ben Ari
+ * @author
  */
 public class Ray {
     /**
@@ -72,7 +72,6 @@ public class Ray {
      * equal methode
      *
      * @param o
-     * @return
      */
     @Override
     public boolean equals(Object o) {
@@ -82,16 +81,11 @@ public class Ray {
         return Objects.equals(_p0, ray._p0) && Objects.equals(_dir, ray._dir);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(_p0, _dir);
-    }
-
     /**
      * return new point in the direction of the ray,in the distance t
      *
      * @param t
-     * @return
+     * @return  new point in the direction of the ray,in the distance t
      */
     public Point3D getPoint(double t) {
         return _p0.add(_dir.scale(t));
@@ -101,7 +95,7 @@ public class Ray {
      * calculate the closest point to the start of the ray
      *
      * @param intersections
-     * @return
+     * @return  the closest point to the start of the ray
      */
     public Point3D getClosestPoint(List<Point3D> intersections) {
         Point3D result = null;
@@ -123,7 +117,7 @@ public class Ray {
      * calculate the closest point to the start of the ray
      *
      * @param geoPointList
-     * @return
+     * @return the closest point to the start of the ray
      */
     public GeoPoint findClosestGeoPoint(List<GeoPoint> geoPointList) {
 
