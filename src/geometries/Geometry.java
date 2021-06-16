@@ -41,8 +41,8 @@ public abstract class Geometry extends Intersectable {
     /**
      * chaining methode
      *
-     * @param emission
-     * @return
+     * @param emission color emitted by the Geometry
+     * @return the Geometry object for chaining
      */
     public Geometry setEmission(Color emission) {
         _emission = emission;

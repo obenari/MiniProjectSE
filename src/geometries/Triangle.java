@@ -43,6 +43,7 @@ public class Triangle extends Polygon {
                 yMax = p.getY();
             if (zMax < p.getZ())
                 zMax = p.getZ();
+
             if (xMin > p.getX())
                 xMin = p.getX();
             if (yMin > p.getY())

@@ -4,7 +4,9 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static primitives.Util.alignZero;
 
@@ -47,33 +49,72 @@ public class AABB {
         double xMin = Double.POSITIVE_INFINITY;
         double yMin = Double.POSITIVE_INFINITY;
         double zMin = Double.POSITIVE_INFINITY;
+
         double xMax = Double.NEGATIVE_INFINITY;
         double yMax = Double.NEGATIVE_INFINITY;
         double zMax = Double.NEGATIVE_INFINITY;
 
 
-        //Iterate over points and find the biggest and smallest points
-        for (AABB b : boxes) {
-            if (b._min.getX() < xMin) {
-                xMin = b._min.getX();
-            }
-            if (b._min.getY() < yMin) {
-                yMin = b._min.getY();
-            }
-            if (b._min.getZ() < zMin) {
-                zMin = b._min.getZ();
-            }
-            if (b._max.getX() > xMax) {
-                xMax = b._max.getX();
-            }
-            if (b._max.getY() > yMax) {
-                yMax = b._max.getY();
-            }
-            if (b._max.getZ() > zMax) {
-                zMax = b._max.getZ();
-            }
+        List<Double> kuku = new LinkedList<>();
+        kuku.add(12.3);
+        kuku.add(14.5);
+        kuku.add(78.9);
+        kuku.add(34.5);
+        kuku.add(5.2);
 
-        }
+
+
+        xMax= boxes.stream()
+                .mapToDouble(e -> e._max.getX())
+                .max()
+                .orElse(-1);
+       xMin= boxes.stream()
+                .mapToDouble(e -> e._min.getX())
+                .min()
+                .orElse(-1);
+
+       yMax= boxes.stream()
+                .mapToDouble(e -> e._max.getY())
+                .max()
+                .orElse(-1);
+
+       yMin= boxes.stream()
+                .mapToDouble(e -> e._min.getY())
+                .min()
+                .orElse(-1);
+       zMax= boxes.stream()
+                .mapToDouble(e -> e._max.getZ())
+                .max()
+                .orElse(-1);
+
+       zMin= boxes.stream()
+                .mapToDouble(e -> e._min.getZ())
+                .min()
+                .orElse(-1);
+
+//        //Iterate over points and find the biggest and smallest points
+//        for (AABB b : boxes) {
+//            if (b._min.getX() < xMin) {
+//                xMin = b._min.getX();
+//            }
+//            if (b._min.getY() < yMin) {
+//                yMin = b._min.getY();
+//            }
+//            if (b._min.getZ() < zMin) {
+//                zMin = b._min.getZ();
+//            }
+//
+//            if (b._max.getX() > xMax) {
+//                xMax = b._max.getX();
+//            }
+//            if (b._max.getY() > yMax) {
+//                yMax = b._max.getY();
+//            }
+//            if (b._max.getZ() > zMax) {
+//                zMax = b._max.getZ();
+//            }
+//
+//        }
         return new AABB(new Point3D(xMin, yMin, zMin), new Point3D(xMax, yMax, zMax));
 
     }

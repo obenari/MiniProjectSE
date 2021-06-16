@@ -137,7 +137,7 @@ public class Geometries extends Intersectable {
         Point3D max1 = geo1._box._max;
         Point3D min2 = geo2._box._min;
         Point3D max2 = geo2._box._max;
-        //calculate the middle point for each box
+        //calculate the centroid point for each box
         double mid1X = (min1.getX() + max1.getX()) / 2d;
         double mid1Y = (min1.getY() + max1.getY()) / 2d;
         double mid1Z = (min1.getZ() + max1.getZ()) / 2d;

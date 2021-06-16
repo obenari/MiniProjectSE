@@ -160,8 +160,8 @@ public class Camera {
         double Rx = _width / nX;//width pixel
 
         Point3D Pij = Pc;
-        double xj = (j - (nX - 1) / 2d) * Rx;//horizontal  distance from the center (ציר אופקי)
-        double yi = -(i - (nY - 1) / 2d) * Ry;//vertical  distance from the center (ציר אנכי)
+        double xj = (j - (nX - 1) / 2d) * Rx;//horizontal  distance from the center
+        double yi = -(i - (nY - 1) / 2d) * Ry;//vertical  distance from the center 
         //in case that xj is zero, its no need to add xj to Pc
         if (!isZero(xj)) {
             Pij = Pij.add(_vRight.scale(xj));
