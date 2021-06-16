@@ -860,7 +860,7 @@ public class ImprovementRunTimeTest {
                     new Triangle(I, N, F)
                             .setEmission(new Color(100, 100, 100)).setMaterial(material)
             );
-            Vector vector = new Vector(-1.5, 0, -3);
+            Vector vector = new Vector(-0.5, 0, -1.5);
             J = J.add(vector);
             A = A.add(vector);
             B = B.add(vector);
@@ -910,6 +910,242 @@ public class ImprovementRunTimeTest {
 
         Render render = new Render(). //
                 setImageWriter(new ImageWriter("BVHAutomaticly1", 400, 400)) //
+                .setCamera(camera) //
+                .setRayTracer(new ImproveSoftShadowRayTracer(scene).setRADIUS(4)).setMultithreading(3).setDebugPrint();
+        scene.geometries.createBVHTree();
+        render.renderImage();
+        render.writeToImage();
+
+    }
+    @Test
+    void createBVHAutomaticly2() {
+        Scene scene = new Scene("Test scene");
+        Camera camera = new Camera(new Point3D(1.5, 0.5, -2), new Vector(-0.5, -0.25, 1), new Vector(0, 1, 0.25)) //
+                .setViewPlaneSize(10, 10).setDistance(5);
+        Point3D J = new Point3D(0.04, -1.5, 1.17);
+        Point3D A = new Point3D(-0.58962, 0, 0.77765);
+        Point3D B = new Point3D(-0.61367, 0, 1.56646);///
+        Point3D C = new Point3D(0, 0, 2);
+        Point3D D = new Point3D(0, 0, 0.36);
+        Point3D E = new Point3D(0.70034, 0, 0.78047);
+        Point3D F = new Point3D(0.6836, 0, 1.62883);
+        Point3D I = new Point3D(0.34, 0, 1.81);//
+        Point3D K = new Point3D(-0.28, 0.5, 0.96);
+        Point3D L = new Point3D(0, 0.5, 0.81);
+        Point3D M = new Point3D(0.39, 0.5, 0.97);
+        Point3D N = new Point3D(0.38, 0.5, 1.41);
+        Point3D O = new Point3D(0, 0.5, 1.59);
+        Point3D P = new Point3D(-0.29, 0.5, 1.37);
+        Point3D Q = new Point3D(0.69, 0, 1.2);
+        Point3D R = new Point3D(0.35, 0, 0.57);//0.35
+        Point3D S = new Point3D(-0.29, 0, 0.57);
+        Point3D T = new Point3D(-0.6, 0, 1.17);
+        Point3D U = new Point3D(-0.31, 0, 1.78);
+        Material material = new Material().setkD(0.4).setkS(0.3).setnShininess(80).setkR(0).setkT(0);
+        Geometries geometries = new Geometries();
+        for (int i = 0; i < 6; i++) {
+
+            geometries.add(
+                    new Triangle(J, U, B)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(J, B, T)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(J, A, T)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(J, A, S)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(J, S, D)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(J, D, R)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(J, E, R)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(J, E, Q)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(J, Q, F)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(J, F, I)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(J, I, C)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(J, C, U)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material));
+            geometries.add(
+                    new Triangle(Q, N, F)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(Q, N, M)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(Q, E, M)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(R, E, M)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(R, L, M)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(R, L, D)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(S, L, D)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(S, L, K)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(S, A, K)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(T, A, K)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(T, P, K)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(T, P, B)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(U, B, P)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(U, P, O)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(U, C, O)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(I, C, O)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(I, N, O)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(I, N, F)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material)
+            );
+            Vector vector = new Vector(1.5, 0, 3);
+            J = J.add(vector);
+            A = A.add(vector);
+            B = B.add(vector);
+            C = C.add(vector);
+            D = D.add(vector);
+            E = E.add(vector);
+            F = F.add(vector);
+            I = I.add(vector);
+            K = K.add(vector);
+            L = L.add(vector);
+            M = M.add(vector);
+            N = N.add(vector);
+            O = O.add(vector);
+            P = P.add(vector);
+            Q = Q.add(vector);
+            R = R.add(vector);
+            S = S.add(vector);
+            T = T.add(vector);
+            U = U.add(vector);
+
+        }
+
+        for (int i = 0; i < 5; i++) {
+
+            geometries.add(
+                    new Triangle(J, U, B)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(J, B, T)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(J, A, T)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(J, A, S)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(J, S, D)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(J, D, R)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(J, E, R)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(J, E, Q)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(J, Q, F)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(J, F, I)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(J, I, C)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(J, C, U)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material));
+            geometries.add(
+                    new Triangle(Q, N, F)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(Q, N, M)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(Q, E, M)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(R, E, M)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(R, L, M)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(R, L, D)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(S, L, D)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(S, L, K)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(S, A, K)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(T, A, K)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(T, P, K)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(T, P, B)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(U, B, P)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(U, P, O)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(U, C, O)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(I, C, O)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material),
+                    new Triangle(I, N, O)
+                            .setEmission(new Color(100, 100, 130)).setMaterial(material),
+                    new Triangle(I, N, F)
+                            .setEmission(new Color(100, 100, 100)).setMaterial(material)
+            );
+            Vector vector = new Vector(-0.5, 1, 1);
+            J = J.add(vector);
+            A = A.add(vector);
+            B = B.add(vector);
+            C = C.add(vector);
+            D = D.add(vector);
+            E = E.add(vector);
+            F = F.add(vector);
+            I = I.add(vector);
+            K = K.add(vector);
+            L = L.add(vector);
+            M = M.add(vector);
+            N = N.add(vector);
+            O = O.add(vector);
+            P = P.add(vector);
+            Q = Q.add(vector);
+            R = R.add(vector);
+            S = S.add(vector);
+            T = T.add(vector);
+            U = U.add(vector);
+
+        }
+        scene.geometries.add(geometries);
+        scene.geometries.add(new Plane(new Point3D(0, -2, 0), new Vector(0, 1, 0.25))
+                        .setMaterial(material),
+                new Plane(new Point3D(-2.3, -2.3, 50), new Vector(1, 0.25, -1))
+                        .setMaterial(material),
+                new Plane(new Point3D(2.3, 2.41, 50), new Vector(-1.0625, 0.25, -1))
+                        .setMaterial(material));
+        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
+        scene.lights.add(
+                new PointLight(new Color(200, 100, 50), new Point3D(0, 0, -50)) //
+                        .setKl(0.0001).setKq(0.00001));
+        scene.lights.add(
+                new SpotLight(new Color(200, 100, 50), new Point3D(0.04, -5, 1.17), new Vector(-0.5, 0, 1) //
+                ).setKl(0.0005).setKq(0.000005));
+        scene.lights.add(
+                new PointLight(new Color(200, 100, 50), new Point3D(0.04, -1, 1.17)) //
+                        .setKl(0.0001).setKq(0.00001));
+        scene.lights.add(
+                new PointLight(new Color(200, 100, 50), new Point3D(-2, -1, 1.17)) //
+                        .setKl(0.0001).setKq(0.00001));
+
+        scene.lights.add(
+                new PointLight(new Color(300, 300, 300), new Point3D(-2, 20, 1.17)) //
+                        .setKl(0.0001).setKq(0.00001));
+
+
+        Render render = new Render(). //
+                setImageWriter(new ImageWriter("BVHAutomaticly2", 400, 400)) //
                 .setCamera(camera) //
                 .setRayTracer(new ImproveSoftShadowRayTracer(scene).setRADIUS(4)).setMultithreading(3).setDebugPrint();
         scene.geometries.createBVHTree();
