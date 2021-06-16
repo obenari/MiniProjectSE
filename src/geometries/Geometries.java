@@ -126,40 +126,6 @@ public class Geometries extends Intersectable {
 
 
     /**
-     * create BVH tree from the geometries
-     */
-    public void createBVHTree1() {
-        List<Intersectable> planeList = new LinkedList<>();
-        for (Intersectable geo : _listOfGeometries) {
-            if (geo instanceof Plane) {
-                planeList.add(geo);
-            }
-        }
-        _listOfGeometries.removeAll(planeList);
-        double distance = 0;
-        Intersectable left = null;
-        Intersectable right = null;
-        while (_listOfGeometries.size() > 1) {
-            double minDistance = Double.POSITIVE_INFINITY;
-            Intersectable geo1 = _listOfGeometries.get(0);
-            for (Intersectable geo2 : _listOfGeometries) {
-                if (geo1 != geo2 && (distance = distance(geo1, geo2)) < minDistance) {
-                    minDistance = distance;
-                    left = geo1;
-                    right = geo2;
-                }
-            }
-
-            Geometries tempGeometries = new Geometries(left, right);
-            _listOfGeometries.remove(left);
-            _listOfGeometries.remove(right);
-            _listOfGeometries.add(tempGeometries);
-
-        }
-        _listOfGeometries.addAll(planeList);
-    }
-
-    /**
      * calculate the distance between two middle point of boxes
      *
      * @param geo1
